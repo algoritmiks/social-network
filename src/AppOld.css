@@ -1,0 +1,32 @@
+.wrapper{
+  display: grid;
+  grid-template-rows: 1fr; /*1 фрейм на всю */
+  justify-items: center; 
+  background-color: #9eb3ae;
+}
+
+.mainWindow{
+  width: 80%;
+  display: grid;
+  grid
+  background-color: indianred;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  
+
+}
+
+.header {
+  background-color: #09d3ac;
+  grid-column: 1/4;
+
+}
+
+.navigation {
+  background-color: bisque;
+}
+
+.content{
+  background-color: grey;
+  grid-column: 2/4;
+}
