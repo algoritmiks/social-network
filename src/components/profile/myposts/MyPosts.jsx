@@ -13,13 +13,8 @@ const MyPosts = () => {
                 <button>Delete post</button>
             </div>
 
-            <Post/>
-            <Post/>
-            <Post/>
-            <Post/>
-            <Post/>
-            <Post/>
-
+            <Post msg="Hi there! How are you?" likes="5" />
+            <Post msg="I'm going to hard work!" likes="100" />
         </div>
     );
 }
