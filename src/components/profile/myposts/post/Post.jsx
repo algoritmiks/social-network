@@ -12,6 +12,7 @@ const Post = (props) => {
             <div>
                 <span>like </span>
                 {props.likes}
+                
             </div>
         </div>
     );
