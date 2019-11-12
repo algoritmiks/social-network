@@ -13,17 +13,19 @@ import Settings from './components/settings/Settings';
 function App() {
   return (
     <div className="mainWindow">
+      <BrowserRouter>
       <Header />
       <Navbar />
       <div className="mainWindow__content">
-        <BrowserRouter>
+        
           <Route path='/profile' component={Profile} />
           <Route path='/dialogs' component={Dialogs} />
           <Route path='/news' component={News} />
           <Route path='/music' component={Music} />
           <Route path='/settings' component={Settings} />
-        </BrowserRouter>
+        
       </div>
+      </BrowserRouter>
     </div>
   );
 }

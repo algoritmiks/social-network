@@ -1,9 +1,16 @@
 .nav {
     grid-area: nav;
-    background-color: bisque;
+    background-color: #c9a401;
+    padding-top: 10px;
     /* grid-row-end: span 10; */
   }
 
-.item{
-  color: red;
+.item a{
+  padding-left: 20px;
+  color: white;
+  text-decoration: none;
 }  
+
+.item a.activeLink{
+  color: rgb(80, 80, 168);
+}
