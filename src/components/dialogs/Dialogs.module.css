@@ -1,0 +1,31 @@
+/* left frame */
+.dialogs{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+
+}
+
+.dialogsItems{
+    padding: 10px;
+}
+
+
+
+.dialog{
+
+}
+
+.dialogsItems .active {
+    color: white;
+}
+
+
+/* right frame */
+.messages{
+    padding: 10px;
+}
+
+.msg{
+
+}
+            
