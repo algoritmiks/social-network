@@ -19,5 +19,7 @@
 @media screen and (max-width: 900px) {
   .mainWindow {
     width: 100%;
+    grid-template-columns: 100px 3fr 2fr;
+
   }
 }
