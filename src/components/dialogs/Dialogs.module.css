@@ -9,15 +9,15 @@
     padding: 10px;
 }
 
-
-
-.dialog{
-
-}
-
-.dialogsItems .active {
+.dialogsItems a.active {
     color: white;
 }
+
+
+.dialogsItems a{
+    text-decoration: none;
+}
+
 
 
 /* right frame */
