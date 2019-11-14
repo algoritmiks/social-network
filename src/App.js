@@ -18,7 +18,7 @@ function App(props) {
       <Navbar />
       <div className="mainWindow__content">
         
-          <Route path='/profile' render={ () => <Profile data = {props.data} /> } />
+          <Route path='/profile' render={ () => <Profile postsData = {props.data.postsData} /> } />
           <Route exact path='/dialogs' render={ () => <Dialogs data = {props.data} /> } />
           <Route path='/news' component={News} />
           <Route path='/music' component={Music} />
