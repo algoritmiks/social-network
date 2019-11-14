@@ -8,7 +8,7 @@ const Post = (props) => {
             <div>
                 {props.msg}
             </div>
-            <img src="http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png" />
+            <img src='/img/ava6.png' alt="avatar" />
             <div>
                 <span>like </span>
                 {props.likes}
