@@ -10,7 +10,7 @@ import Music from './components/music/Music';
 import Settings from './components/settings/Settings';
 
 
-function App() {
+function App(props) {
   return (
     <div className="mainWindow">
       <BrowserRouter>
@@ -18,8 +18,8 @@ function App() {
       <Navbar />
       <div className="mainWindow__content">
         
-          <Route path='/profile' component={Profile} />
-          <Route exact path='/dialogs' component={Dialogs} />
+          <Route path='/profile' render={ () => <Profile data = {props.data} /> } />
+          <Route exact path='/dialogs' render={ () => <Dialogs data = {props.data} /> } />
           <Route path='/news' component={News} />
           <Route path='/music' component={Music} />
           <Route path='/settings' component={Settings} />

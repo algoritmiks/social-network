@@ -3,13 +3,9 @@ import css from './MyPosts.module.css';
 import Post from './post/Post';
 
 
-const MyPosts = () => {
-    let postsData = [
-    {id: 1, post: "Hi there! How are you?", likes: 5},
-    {id: 2, post: "I'm going to hard work!", likes: 100},
-    ]
+const MyPosts = (props) => {
 
-    let postsArray = postsData.map( post => <Post msg={post.post} likes={post.likes} />);
+    let postsArray = props.data.postsData.map( post => <Post msg={post.post} likes={post.likes} />);
     
     return (
         <div className={css.myPostsBlock}>
