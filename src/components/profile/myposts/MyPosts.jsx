@@ -8,6 +8,9 @@ const MyPosts = () => {
     {id: 1, post: "Hi there! How are you?", likes: 5},
     {id: 2, post: "I'm going to hard work!", likes: 100},
     ]
+
+    let postsArray = postsData.map( post => <Post msg={post.post} likes={post.likes} />);
+    
     return (
         <div className={css.myPostsBlock}>
             <h3>My posts</h3>
@@ -17,8 +20,8 @@ const MyPosts = () => {
                 <button>Delete post</button>
             </div>
 
-            <Post msg={postsData[0].post} likes={postsData[0].likes} />
-            <Post msg={postsData[1].post} likes={postsData[1].likes} />
+            { postsArray }
+
         </div>
     );
 }
