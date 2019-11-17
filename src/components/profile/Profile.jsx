@@ -5,11 +5,12 @@ import ProfileInfo from './profileInfo/ProfileInfo';
 
 
 const Profile = (props) => {
-    debugger;
     return (
         <div>
             <ProfileInfo />
-            <MyPosts postsData={props.postsData}
+            <MyPosts postsData={props.profileComponent.postsData}
+                newPostText={props.profileComponent.newPostText}
+                updateNewPostText={props.updateNewPostText}
                 addPost={props.addPost}/>
         </div>
     );
