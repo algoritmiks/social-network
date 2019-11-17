@@ -6,7 +6,7 @@ let state = {
             { id: 1, post: "Hi there! How are you?", likes: 5 },
             { id: 2, post: "I'm going to hard work!", likes: 100 }
         ],
-        newPostText: 'text here'
+        newPostText: ''
     },
 
     dialogsComponent: {
