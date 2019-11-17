@@ -1,9 +1,11 @@
-export default {
+import {render} from './../render';
+
+let data = {
     profileComponent: {
         postsData: [
-            {id: 1, post: "Hi there! How are you?", likes: 5},
-            {id: 2, post: "I'm going to hard work!", likes: 100}
-            ]
+            { id: 1, post: "Hi there! How are you?", likes: 5 },
+            { id: 2, post: "I'm going to hard work!", likes: 100 }
+        ]
     },
 
     dialogsComponent: {
@@ -21,3 +23,14 @@ export default {
     }
 };
 
+export let addPost = (post) => {
+    let newPost = {
+        id: 3,
+        post: post,
+        likes: 0
+    }
+    data.profileComponent.postsData.push(newPost);
+    render(data);
+};
+
+export default data;

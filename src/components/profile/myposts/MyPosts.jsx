@@ -7,13 +7,27 @@ const MyPosts = (props) => {
 
     let postsArray = props.postsData.map( post => <Post msg={post.post} likes={post.likes} /> );
     
+
+    const newPost = () => {
+        debugger;
+        props.addPost(newPostElem.current.value);
+        newPostElem.current.value = '';
+    };
+
+    const delPost = () => {
+        alert('soon');
+    };
+
+    let newPostElem = React.createRef();
+    
+
     return (
         <div className={css.myPostsBlock}>
             <h3>My posts</h3>
             <div>
-                <textarea>Enter your post here</textarea> <br/>
-                <button>Add post</button>
-                <button>Delete post</button>
+                <textarea ref={ newPostElem }></textarea> <br/>
+                <button onClick={ newPost }>Add post</button>
+                <button onClick={ delPost }>Delete post</button>
             </div>
 
             { postsArray }
