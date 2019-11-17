@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import {addPost} from './redux/state';
 
-export const render = (data) => {
-    ReactDOM.render(<App data={data} addPost={addPost}/>, document.getElementById('root'));
+export const render = (state) => {
+    ReactDOM.render(<App state={state} addPost={addPost}/>, document.getElementById('root'));
 }
 

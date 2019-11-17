@@ -1,6 +1,6 @@
 import {render} from './../render';
 
-let data = {
+let state = {
     profileComponent: {
         postsData: [
             { id: 1, post: "Hi there! How are you?", likes: 5 },
@@ -29,8 +29,8 @@ export let addPost = (post) => {
         post: post,
         likes: 0
     }
-    data.profileComponent.postsData.push(newPost);
-    render(data);
+    state.profileComponent.postsData.push(newPost);
+    render(state);
 };
 
-export default data;
+export default state;
