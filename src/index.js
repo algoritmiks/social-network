@@ -7,7 +7,7 @@ import App from './App';
 import {addPost, updateNewPostText, subscribe} from './redux/state';
 
 
-const render = () => {
+const render = (state) => {
     ReactDOM.render(<App state={state} 
         addPost={addPost} 
         updateNewPostText={updateNewPostText}
