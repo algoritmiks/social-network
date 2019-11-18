@@ -1,4 +1,4 @@
-import {render} from './../render';
+let render;
 
 let state = {
     profileComponent: {
@@ -38,6 +38,10 @@ export const addPost = () => {
 export const updateNewPostText = (text) => {
     state.profileComponent.newPostText = text;
     render(state);
+}
+
+export const subscribe = (observer) => {
+    render = observer;
 }
 
 export default state;
