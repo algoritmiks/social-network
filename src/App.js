@@ -11,6 +11,7 @@ import Settings from './components/settings/Settings';
 
 
 function App(props) {
+  debugger;
   return (
     <div className="mainWindow">
       <BrowserRouter>
