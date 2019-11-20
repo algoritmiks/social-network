@@ -32,22 +32,6 @@ let store = {
         this._callSubscriber = observer;
     },
 
-    addPost() {
-        let newPost = {
-            id: 3,
-            post: this._state.profileComponent.newPostText,
-            likes: 0
-        }
-        this._state.profileComponent.postsData.push(newPost);
-        this._state.profileComponent.newPostText='';
-        this._callSubscriber(this._state);
-    },
-
-    updateNewPostText(text) {
-        this._state.profileComponent.newPostText = text;
-        this._callSubscriber(this._state);
-    },
-
     dispatch(action) {
         if (action.type === "ADD-POST") {
             let newPost = {
