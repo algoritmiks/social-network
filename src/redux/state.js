@@ -53,20 +53,10 @@ let store = {
 
 };
 
-export const updateNewPostTextActionCreate = (text) => {
-    let action = {
-        type: UPDATE_NEW_POST_TEXT,
-        text: text
-    }
-    return action;
-}
-
-export const newPostActionCreate = () => {
-    let action = {
-        type: ADD_POST,
-    }
-    return action;
-}
+export const updateNewPostTextActionCreate = (text) => 
+    ({ type: UPDATE_NEW_POST_TEXT, text: text });
+    
+export const newPostActionCreate = () => ( {type: ADD_POST} );
 
 
 window.store = store;
