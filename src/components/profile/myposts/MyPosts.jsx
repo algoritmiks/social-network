@@ -4,7 +4,6 @@ import Post from './post/Post';
 import { updateNewPostTextActionCreate, newPostActionCreate } from '../../../redux/state';
 
 
-
 const MyPosts = (props) => {
     let postsArray = props.postsData.map( post => <Post msg={post.post} likes={post.likes} /> );
 
@@ -17,10 +16,6 @@ const MyPosts = (props) => {
         let action = updateNewPostTextActionCreate(newPostElem.current.value);
         props.dispatch(action);
     };
-
-
-    
-  
 
     let newPostElem = React.createRef();
     
