@@ -18,8 +18,7 @@ function App(props) {
       <Header />
       <Navbar />
       <div className="mainWindow__content">
-          <Route path='/profile' render={ () => <Profile addPost={props.addPost} 
-            updateNewPostText={props.updateNewPostText}
+          <Route path='/profile' render={ () => <Profile dispatch ={ props.dispatch }
             profileComponent = {props.state.profileComponent} /> } />
           <Route exact path='/dialogs' render={ () => <Dialogs state = {props.state.dialogsComponent} /> } />
           <Route path='/news' component={News} />

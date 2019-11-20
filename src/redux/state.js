@@ -28,6 +28,10 @@ let store = {
 
     getState() { return this._state },
 
+    subscribe(observer) {
+        this._callSubscriber = observer;
+    },
+
     addPost() {
         let newPost = {
             id: 3,
@@ -40,14 +44,26 @@ let store = {
     },
 
     updateNewPostText(text) {
-        debugger;
         this._state.profileComponent.newPostText = text;
         this._callSubscriber(this._state);
     },
 
-    subscribe(observer) {
-        this._callSubscriber = observer;
+    dispatch(action) {
+        if (action.type === "ADD-POST") {
+            let newPost = {
+                id: 3,
+                post: this._state.profileComponent.newPostText,
+                likes: 0
+            }
+            this._state.profileComponent.postsData.push(newPost);
+            this._state.profileComponent.newPostText='';
+            this._callSubscriber(this._state);
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+            this._state.profileComponent.newPostText = action.text;
+            this._callSubscriber(this._state);
+        }
     }
+
 };
 
 window.store = store;

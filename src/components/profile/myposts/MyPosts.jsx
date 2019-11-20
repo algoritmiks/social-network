@@ -7,12 +7,17 @@ const MyPosts = (props) => {
     let postsArray = props.postsData.map( post => <Post msg={post.post} likes={post.likes} /> );
 
     const newPost = () => {
-        props.addPost();
+        props.dispatch({
+            type: "ADD-POST"
+        })
     };
 
     const updateText = () => {
-        props.updateNewPostText(newPostElem.current.value);
-    }
+        props.dispatch({
+            type: "UPDATE-NEW-POST-TEXT",
+            text: newPostElem.current.value
+        })
+    };
 
     let newPostElem = React.createRef();
     
