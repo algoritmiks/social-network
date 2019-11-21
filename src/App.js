@@ -20,7 +20,8 @@ function App(props) {
       <div className="mainWindow__content">
           <Route path='/profile' render={ () => <Profile dispatch ={ props.dispatch }
             profileComponent = {props.state.profileComponent} /> } />
-          <Route exact path='/dialogs' render={ () => <Dialogs state = {props.state.dialogsComponent} /> } />
+          <Route exact path='/dialogs' render={ () => <Dialogs dispatch ={ props.dispatch }
+          state = {props.state.dialogsComponent} /> } />
           <Route path='/news' component={News} />
           <Route path='/music' component={Music} />
           <Route path='/settings' component={Settings} />
