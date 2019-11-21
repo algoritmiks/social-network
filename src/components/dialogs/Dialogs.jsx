@@ -5,19 +5,17 @@ import Message from './message/Message';
 import { updateNewMessageTextActionCreate, newMessageActionCreate } from '../../redux/state';
 
 const Dialogs = (props) => {
-    debugger;
+    
     let conversationsElems = props.state.conversations.map(name => <DialogItem id={name.id} name={name.name} />);
     
     let messagesElements = props.state.messages.map(message => <Message msg={message.msg} />)
 
-    let newMessageElem = React.createRef();
-
-    const updateText = () => {
-        let action = updateNewMessageTextActionCreate(newMessageElem.current.value);
+    const updateText = (event) => {
+        let action = updateNewMessageTextActionCreate(event.target.value);
         props.dispatch(action);
     };
 
-    const newMessage = () => {
+    const newMessageSend = () => {
         let action = newMessageActionCreate();
         props.dispatch(action);
     };
@@ -32,8 +30,10 @@ const Dialogs = (props) => {
                 { messagesElements }
             </div>
 
-            <textarea onChange={ updateText } ref={ newMessageElem } value={ props.state.newMessageText }></textarea> <br/>
-            <button onClick={ newMessage }>send</button>
+            <textarea onChange={ updateText } value={ props.state.newMessageText }
+                placeholder={ "enter your message here" }></textarea> <br/>
+                
+            <button onClick={ newMessageSend }>send</button>
         </div>
     );
 }
