@@ -1,7 +1,5 @@
-const ADD_POST="ADD-POST";
-const ADD_MESSAGE="ADD-MESSAGE";
-const UPDATE_NEW_POST_TEXT="UPDATE-NEW-POST-TEXT";
-const UPDATE_NEW_MESSAGE_TEXT="UPDATE-NEW-MESSAGE-TEXT";
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
 
 let store = {
 
@@ -39,43 +37,11 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: 3,
-                post: this._state.profileComponent.newPostText,
-                likes: 0
-            }
-            this._state.profileComponent.postsData.push(newPost);
-            this._state.profileComponent.newPostText='';
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profileComponent.newPostText = action.text;
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            debugger;
-            this._state.dialogsComponent.newMessageText = action.text;
-            this._callSubscriber(this._state);
-        } else if (action.type === ADD_MESSAGE) {
-            let newMessage = {
-                id: 1,
-                msg: this._state.dialogsComponent.newMessageText
-            }
-            this._state.dialogsComponent.messages.push(newMessage);
-            this._state.dialogsComponent.newMessageText='';
-            this._callSubscriber(this._state);
-        }
+        this._state.profileComponent = profileReducer(this._state.profileComponent, action);
+        this._state.dialogsComponent = dialogsReducer(this._state.dialogsComponent, action);
+        this._callSubscriber(this._state);
     }
 };
-
-export const updateNewPostTextActionCreate = (text) => 
-    ({ type: UPDATE_NEW_POST_TEXT, text: text });
-    
-export const newPostActionCreate = () => ( {type: ADD_POST} );
-
-export const updateNewMessageTextActionCreate = (text) => 
-    ({ type: UPDATE_NEW_MESSAGE_TEXT, text: text });
-
-export const newMessageActionCreate = () => ( {type: ADD_MESSAGE} );
 
 window.store = store;
 
