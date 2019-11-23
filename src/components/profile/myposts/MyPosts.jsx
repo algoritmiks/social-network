@@ -5,6 +5,7 @@ import { updateNewPostTextActionCreate, newPostActionCreate } from '../../../red
 
 
 const MyPosts = (props) => {
+    
     let postsArray = props.postsData.map( post => <Post msg={post.post} likes={post.likes} /> );
 
     const newPost = () => {
