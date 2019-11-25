@@ -17,10 +17,16 @@ function App(props) {
       <Header />
       <Navbar />
       <div className="mainWindow__content">
-          <Route path='/profile' render={ () => <Profile dispatch ={ props.dispatch }
-            profileComponent = {props.state.profileComponent} /> } />
+
+          <Route path='/profile' 
+            render={ () => <Profile store={ props.store } /> } 
+          />
+
           <Route exact path='/dialogs' render={ () => <Dialogs dispatch ={ props.dispatch }
-          state = {props.state.dialogsComponent} /> } />
+          state = {props.state.dialogsComponent} 
+          store = { props.store }
+          /> } />
+          
           <Route path='/news' component={News} />
           <Route path='/music' component={Music} />
           <Route path='/settings' component={Settings} />

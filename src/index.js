@@ -8,6 +8,7 @@ import App from './App';
 
 const renderAllPages = (state) => {
     ReactDOM.render(<App state={ state } 
+        store={ store }
         dispatch={ store.dispatch.bind(store) }
         />, document.getElementById('root'));
 }
