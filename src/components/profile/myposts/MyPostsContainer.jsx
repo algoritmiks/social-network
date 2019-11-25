@@ -17,7 +17,8 @@ const MyPostsContainer = (props) => {
     let postsData = props.store.getState().profileComponent.postsData;
     
     return (
-        <MyPosts newPost= { newPost }
+        <MyPosts 
+        newPost= { newPost }
         updateText = { updateText }
         postsData={ postsData }
         />

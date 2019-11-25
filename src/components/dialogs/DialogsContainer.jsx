@@ -17,11 +17,10 @@ const DialogsContainer = (props) => { //props.store
     };
 
     return (
-        <Dialogs conversations = { state.conversations }
-        messages = { state.messages }
+        <Dialogs 
         updateText = { updateText }
-        newMessageText = { state.newMessageText }
         newMessageSend = { newMessageSend }
+        state = { state }
         />
     );
 }
