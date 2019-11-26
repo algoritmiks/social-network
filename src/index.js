@@ -5,15 +5,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {BrowserRouter} from 'react-router-dom';
 import App from './App';
-import StoreContext from './storeContext';
+import {Provider} from './storeContext';
 
 
 const renderAllPages = (state) => {
     ReactDOM.render(
         <BrowserRouter>
-            <StoreContext.Provider value={store}>
+            <Provider store = { store }>
                 <App />
-            </StoreContext.Provider>
+            </Provider>
         </BrowserRouter>, document.getElementById('root'));
 }
 
