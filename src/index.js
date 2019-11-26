@@ -8,7 +8,7 @@ import App from './App';
 import {Provider} from './storeContext';
 
 
-const renderAllPages = (state) => {
+const renderAllPages = () => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store = { store }>
@@ -17,8 +17,8 @@ const renderAllPages = (state) => {
         </BrowserRouter>, document.getElementById('root'));
 }
 
-renderAllPages(store.getState());
-store.subscribe( () => { renderAllPages(store.getState()) } );
+renderAllPages();
+store.subscribe( () => { renderAllPages() } );
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
