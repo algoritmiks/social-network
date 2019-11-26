@@ -3,14 +3,18 @@ import * as serviceWorker from './serviceWorker';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import {BrowserRouter} from 'react-router-dom';
 import App from './App';
+import StoreContext from './storeContext';
 
 
 const renderAllPages = (state) => {
-    ReactDOM.render(<App state={ state } 
-        store={ store }
-        dispatch={ store.dispatch.bind(store) }
-        />, document.getElementById('root'));
+    ReactDOM.render(
+        <BrowserRouter>
+            <StoreContext.Provider value={store}>
+                <App />
+            </StoreContext.Provider>
+        </BrowserRouter>, document.getElementById('root'));
 }
 
 renderAllPages(store.getState());
