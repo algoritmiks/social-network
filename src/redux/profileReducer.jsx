@@ -12,17 +12,24 @@ let initialState = {
 const profileReducer = (state=initialState, action) => {
     switch(action.type) {
         case ADD_POST:
+            {   //фигурная скобка чтобы ограничить область видимости для stateUpdate
                 let newPost = {
                     id: 3,
                     post: state.newPostText,
                     likes: 0
                 }
-                state.postsData.push(newPost);
-                state.newPostText = '';
-                return state;
+                let stateUpdate = {...state};
+                stateUpdate.postsData = [...state.postsData];
+                stateUpdate.postsData.push(newPost);
+                stateUpdate.newPostText = '';
+                return stateUpdate;
+            }
         case UPDATE_NEW_POST_TEXT:
-                state.newPostText = action.text;
-                return state;
+            {   //фигурная скобка чтобы ограничить область видимости для stateUpdate
+                let stateUpdate = {...state};
+                stateUpdate.newPostText = action.text;
+                return stateUpdate;
+            }
         default: 
             return state                
     }
