@@ -4,10 +4,10 @@ import DialogItem from './dialogItem/DialogItem';
 import Message from './message/Message';
 
 const Dialogs = (props) => {
-    debugger;
-    let conversationsElems = props.dialogsComponent.conversations.map(name => <DialogItem id={name.id} name={name.name} />);
     
-    let messagesElements = props.dialogsComponent.messages.map(message => <Message msg={message.msg} />)
+    let conversationsElems = props.dialogsComponent.conversations.map(name => <DialogItem id={name.id} key={name.id} name={name.name} />);
+    
+    let messagesElements = props.dialogsComponent.messages.map(message => <Message msg={message.msg} key={message.id} />)
 
     const updateText = (event) => {
         props.updateText(event.target.value)

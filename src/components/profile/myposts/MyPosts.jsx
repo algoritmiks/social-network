@@ -4,8 +4,8 @@ import Post from './post/Post';
 
 
 const MyPosts = (props) => {
-    debugger;
-    let postsArray = props.profileComponent.postsData.map( post => <Post msg={post.post} likes={post.likes} /> );
+    
+    let postsArray = props.profileComponent.postsData.map( post => <Post msg={post.post} key={post.id} likes={post.likes} /> );
 
     const addPost = () => {
         props.newPost();
