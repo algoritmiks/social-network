@@ -1,47 +1,63 @@
-import React from 'react';
+import React from 'react'
 import css from './Users.module.css'
+import * as axios from 'axios'
 
-const Users = (props) => {
-    if (props.users.length === 0) {
-        props.setUsers([
-            { id: 1, avaSrc: '/img/girl1.jpg', follow: true, fullName: "Sveta", status: "free for chat", location: {country:"Russia", city: "Moscow"} },
-            { id: 2, avaSrc: '/img/ava.png', follow: false, fullName: "Misha", status: "free for chat", location: {country:"Russia", city: "Yaroslavl"} },
-            { id: 3, avaSrc: '/img/ava2.jpg', follow: false, fullName: "Dima", status: "free for chat", location: {country:"Russia", city: "Piter"} },
-            { id: 4, avaSrc: '/img/ava4.png', follow: true, fullName: "Katya", status: "learning", location: {country:"Russia", city: "Piter"} },
-        ]);
+   // "name": "anatoliy",
+    //             "id": 5358,
+    //             "uniqueUrlName": null,
+    //             "photos": {
+    //                 "small": null,
+    //                 "large": null
+    //             },
+    //             "status": null,
+    //             "followed": false
+
+
+class Users extends React.Component {
+
+    getUsers = () => {
+        if (this.props.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users')
+                .then(response => {
+                    this.props.setUsers(response.data.items);
+                });
+        }
     }
-    
 
-    let usersArr = props.users.map(user =>
-        <div >
+    render() {
+        debugger
+        return (
             <div>
-                {user.fullName}
+                
+                <button onClick={this.getUsers}>get users</button>
+                        
+                {this.props.users.map(user =>
+                    <div >
+                        <div>
+                            {user.name}
+                        </div>
+                        <div>
+                            <img className={css.ava} src={user.photos.large !=null ? user.photos.large : '/img/ava.png'}></img>
+                        </div>
+                        <div>
+                            {"user.location.country"}
+                        </div>
+                        <div>
+                            {"user.location.city"}
+                        </div>
+                        <div>
+                            {"user.status"}
+                        </div>
+                        <div>
+                            {user.followed
+                                ? <button onClick={() => this.props.setUnfollow(user.id)}> Unfollow </button>
+                                : <button onClick={() => this.props.setFollow(user.id)}> Follow </button>}
+                        </div>
+                    </div>)
+                }
             </div>
-            <div>
-                <img className={css.ava} src={user.avaSrc}></img>
-            </div>
-            <div>
-                {user.location.country}
-            </div>
-            <div>
-                {user.location.city}
-            </div>
-            <div>
-                {user.status}
-            </div>
-            <div>
-                { user.follow 
-                    ? <button onClick={ () => props.setUnfollow(user.id) }> Unfollow </button> 
-                    : <button onClick={ () => props.setFollow(user.id) }> Follow </button> }
-            </div>
-        </div>
         );
-    return (
-        <div>
-            { usersArr }
-        </div>
-    );
+    }
 }
-
 
 export default Users;
