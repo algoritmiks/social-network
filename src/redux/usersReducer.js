@@ -1,4 +1,3 @@
-const SHOW_MORE = "SHOW-MORE";
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
