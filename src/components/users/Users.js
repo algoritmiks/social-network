@@ -13,7 +13,6 @@ import css from './Users.module.css'
 
 
 const Users = (props) => {
-    debugger
     let pagesCount = Math.ceil(props.totalUsers / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {

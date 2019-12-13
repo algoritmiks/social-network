@@ -3,6 +3,7 @@ const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOTAL_USERS = "SET_TOTAL_USERS";
+const SET_LOADER = "SET_LOADER";
 
 let initialState = {
     users: [
@@ -13,7 +14,9 @@ let initialState = {
     ],
     totalUsers: 0,
     pageSize: 5,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false,
+    isLoading: false
 };
 
 
@@ -54,6 +57,10 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state, totalUsers: action.totalUsers
             }
+        case SET_LOADER:
+            return {
+                ...state, isLoading: action.isLoading
+            }
         default:
             return state
     }
@@ -68,5 +75,7 @@ export const setUsers = (users) => ( { type: SET_USERS, users } );
 export const setCurrentPage = (currentPage) => ( {type: SET_CURRENT_PAGE, currentPage: currentPage} );
 
 export const setTotalUsers = (totalUsers) => ( {type: SET_TOTAL_USERS, totalUsers: totalUsers} );
+
+export const setLoading = (isLoading) => ( {type: SET_LOADER, isLoading: isLoading} );
 
 export default usersReducer;
