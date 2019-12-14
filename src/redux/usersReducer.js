@@ -66,9 +66,9 @@ const usersReducer = (state = initialState, action) => {
     }
 }
 
-export const followActionCreator = (userID) => ( { type: FOLLOW, userID: userID } );
+export const setFollow = (userID) => ( { type: FOLLOW, userID: userID } );
     
-export const unfollowActionCreator = (userID) => ( {type: UNFOLLOW, userID: userID} );
+export const setUnfollow = (userID) => ( {type: UNFOLLOW, userID: userID} );
 
 export const setUsers = (users) => ( { type: SET_USERS, users } );
 
