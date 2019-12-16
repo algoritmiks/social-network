@@ -1,5 +1,6 @@
 import React from 'react'
 import css from './Users.module.css'
+import {NavLink} from 'react-router-dom';
 
 // "name": "anatoliy",
 //             "id": 5358,
@@ -34,7 +35,9 @@ const Users = (props) => {
                         {user.name}
                     </div>
                     <div>
+                    <NavLink to={'/profile/'+user.id}>
                         <img className={css.ava} src={user.photos.large != null ? user.photos.large : '/img/ava.png'}></img>
+                    </NavLink>
                     </div>
                     <div>
                         {"user.location.country"}
