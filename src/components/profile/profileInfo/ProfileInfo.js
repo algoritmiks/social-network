@@ -4,8 +4,6 @@ import Preloader from '../../common/preloader/preloader';
 // import car from './../img/s1200.jpg';  Как вариант, если пикча лежит не в public/img
 
 const ProfileInfo = (props) => {
-    debugger
-
     if(!props.profile){
         return <Preloader />
     }

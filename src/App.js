@@ -17,7 +17,7 @@ function App() {
       <Header />
       <Navbar />
       <div className="mainWindow__content">
-        <Route path='/profile'
+        <Route path='/profile/:userID?'
           render={() => <ProfileContainer />}
         />
         <Route exact path='/dialogs'
