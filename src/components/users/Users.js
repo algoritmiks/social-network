@@ -36,7 +36,7 @@ const Users = (props) => {
                     </div>
                     <div>
                     <NavLink to={'/profile/'+user.id}>
-                        <img className={css.ava} src={user.photos.large != null ? user.photos.large : '/img/ava.png'}></img>
+                        <img className={css.ava} src={user.photos.large != null ? user.photos.large : '/img/ava.png'} alt="user"></img>
                     </NavLink>
                     </div>
                     <div>
