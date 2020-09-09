@@ -13,6 +13,11 @@ import * as axios from 'axios';
 
 class UsersAPIComponent extends React.Component {
 
+  // constructor(props) { //You shouldn't use this bind, if you use arrow function
+  //   super(props);
+  //   this.pageChanged = this.pageChanged.bind(this);
+  // }
+
     componentDidMount(props) {
         this.props.setLoading(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
@@ -25,7 +30,7 @@ class UsersAPIComponent extends React.Component {
     };
 
 
-    pageChanged = (pageNum) => {
+    pageChanged = (pageNum) => {   //You should use arrow function here, or use bind in constructor
         this.props.setCurrentPage(pageNum);
         this.props.setLoading(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNum}&count=${this.props.pageSize}`)

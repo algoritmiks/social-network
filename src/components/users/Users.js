@@ -20,17 +20,20 @@ const Users = (props) => {
         pages.push(i);
     }
 
+    const changeCurrentPage = (e) => {
+      if (e.target.tagName === "SPAN") {
+        props.pageChanged(Number(e.target.textContent))
+      }
+    }
+
     return (
         <div>
-            <div>
-                {pages.map(pageNum =>
-                    <span className={pageNum === props.currentPage && css.active}
-                        onClick={(event) => props.pageChanged(pageNum)}>
-                        {pageNum}
-                    </span>)}
+            <div onClick= { changeCurrentPage }>
+              { pages.map( page => <span className={props.currentPage === page && css.active}> {page} </span> ) }
             </div>
+            
             {props.users.map(user =>
-                <div >
+                <div>
                     <div>
                         {user.name}
                     </div>
