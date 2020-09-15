@@ -11,12 +11,17 @@ const ProfileInfo = (props) => {
     return (
         <div>
             <div>
-                <img className={css.img_primary} src='/img/content_top.jpg' alt='logo' />
+              <img className={css.img_primary} src='/img/content_top.jpg' alt='logo' />
             </div>
 
             <div>
-                    {/* <img className={css.img_ava} src='/img/ava.png' alt='avatar' /> */}
-                    <img className={css.img_ava} src={props.profile.photos.large} alt='avatar' />
+              <img className={css.img_ava} src={props.profile.photos.large || '/img/ava.png'} alt='avatar' />
+            </div>
+
+            <div>
+              <p>Full name: {props.profile.fullName}</p>
+              <p>Contacts</p>
+              <p> github: <a href={props.profile.contacts.github}> {props.profile.contacts.github} </a></p>
             </div>
         </div>
     );
