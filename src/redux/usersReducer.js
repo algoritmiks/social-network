@@ -15,7 +15,6 @@ let initialState = {
     totalUsers: 0,
     pageSize: 5,
     currentPage: 1,
-    isFetching: false,
     isLoading: false
 };
 

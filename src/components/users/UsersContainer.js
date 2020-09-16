@@ -66,7 +66,6 @@ const mapStateToProps = (state) => {
         pageSize: state.usersComponent.pageSize,
         totalUsers: state.usersComponent.totalUsers,
         currentPage: state.usersComponent.currentPage,
-        isFetching: state.usersComponent.isFetching,
         isLoading: state.usersComponent.isLoading
     };
 };
