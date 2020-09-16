@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
-import Header from './components/header/Header';
+import HeaderContainer from './components/header/HeaderContainer';
 import Navbar from './components/navbar/Navbar';
 import DialogsContainer from './components/dialogs/DialogsContainer';
 import News from './components/news/News';
@@ -14,7 +14,7 @@ import ProfileContainer from './components/profile/ProfileContainer';
 function App() {
   return (
     <div className="mainWindow">
-      <Header />
+      <HeaderContainer />
       <Navbar />
       <div className="mainWindow__content">
         <Route path='/profile/:userID?'
