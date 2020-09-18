@@ -10,7 +10,8 @@ import {
   setUsers,
   setCurrentPage,
   setTotalUsers,
-  setLoading
+  setLoading,
+  followingChange
 } from '../../redux/usersReducer';
 import { getUsers } from '../../api/api';
 
@@ -58,6 +59,8 @@ class UsersAPIComponent extends React.Component {
             setUnfollow={this.props.setUnfollow}
             setFollow={this.props.setFollow}
             pageSize={this.props.pageSize}
+            followingInProgres={this.props.followingInProgres}
+            followingChange = {this.props.followingChange}
           />
         }
       </>
@@ -71,11 +74,13 @@ const mapStateToProps = (state) => {
     pageSize: state.usersComponent.pageSize,
     totalUsers: state.usersComponent.totalUsers,
     currentPage: state.usersComponent.currentPage,
-    isLoading: state.usersComponent.isLoading
+    isLoading: state.usersComponent.isLoading,
+    followingInProgres: state.usersComponent.followingInProgres
   };
 };
 
 const UsersContainer = connect(mapStateToProps,
-  { setFollow, setUnfollow, setUsers, setTotalUsers, setCurrentPage, setLoading })(UsersAPIComponent);
+  { setFollow, setUnfollow, setUsers, setTotalUsers, setCurrentPage, setLoading, followingChange })(UsersAPIComponent);
+
 
 export default UsersContainer;
