@@ -1,16 +1,16 @@
-//components
 import React from 'react';
+import { connect } from 'react-redux';
+
+//redux
+import {
+  setFollow, setUnfollow, followingChange, getUsers
+} from '../../redux/usersReducer';
+
+//components
 import Users from './Users';
 import Preloader from '../common/preloader/preloader'
 
-//reducers and other functions
-import {
-  setFollow, setUnfollow, followingChange, getUsersThunkCreator
-} from '../../redux/usersReducer';
 
-
-//dlls
-import { connect } from 'react-redux';
 
 
 class UsersAPIComponent extends React.Component {
@@ -65,8 +65,7 @@ const mapStateToProps = (state) => {
 };
 
 const UsersContainer = connect(mapStateToProps,
-  { setFollow, setUnfollow, followingChange, 
-    getUsers: getUsersThunkCreator })(UsersAPIComponent);
+  { setFollow, setUnfollow, followingChange, getUsers })(UsersAPIComponent);
 
 
 export default UsersContainer;

@@ -1,4 +1,4 @@
-import { getUsers } from '../api/api';
+import { getUsersAPI } from '../api/api';
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -90,11 +90,11 @@ export const setLoading = (isLoading) => ({ type: SET_LOADER, isLoading: isLoadi
 
 export const followingChange = (followingInProgres, id) => ({ type: FOLLOWING_CHANGING, followingInProgres, id});
 
-export const getUsersThunkCreator = (currentPage, pageSize) => (dispatch) => {
+export const getUsers = (currentPage, pageSize) => (dispatch) => {
   dispatch(setLoading(true));
   dispatch(setCurrentPage(currentPage));
 
-  getUsers(currentPage, pageSize).then(data => {
+  getUsersAPI(currentPage, pageSize).then(data => {
     dispatch(setLoading(false));
     dispatch(setUsers(data.items));
     dispatch(setTotalUsers(data.totalCount));

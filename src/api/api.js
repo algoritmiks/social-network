@@ -8,7 +8,7 @@ const axiosRequest = axios.create({
   headers: getAPIKey()
 });
 
-export const getUsers = (currentPage, pageSize) => {
+export const getUsersAPI = (currentPage, pageSize) => {
   return axiosRequest.get(`users?page=${currentPage}&count=${pageSize}`)
     .then( response => response.data);
 }
