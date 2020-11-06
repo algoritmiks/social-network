@@ -1,7 +1,6 @@
 import React from 'react'
 import css from './Users.module.css'
 import { NavLink } from 'react-router-dom';
-import { setFollow, setUnfollow } from '../../api/api';
 
 // "name": "anatoliy",
 //             "id": 5358,
@@ -53,27 +52,17 @@ const Users = (props) => {
             {"user.status"}
           </div>
           <div>
-            {user.followed
+            {
+              user.followed
+
               ? <button disabled={ props.followingInProgres.some(el => el === user.id) } onClick={() => {
-                props.followingChange(true, user.id);
-                setUnfollow(user.id)
-                  .then(resultCode => {
-                    if (resultCode === 0) {
-                      props.setUnfollow(user.id);
-                    }
-                    props.followingChange(false, user.id);
-                  });
-              }}> Unfollow </button>
+                  props.setUnfollow(user.id);
+                }}> Unfollow </button>
+
               : <button disabled={ props.followingInProgres.some(el => el === user.id) } onClick={() => {
-                props.followingChange(true, user.id);
-                setFollow(user.id)
-                  .then(resultCode => {
-                    if (resultCode === 0) {
-                      props.setFollow(user.id);
-                    }
-                    props.followingChange(false, user.id);
-                  });
-              }}> Follow </button>}
+                  props.setFollow(user.id);
+                }}> Follow </button>
+              }
           </div>
         </div>)
       }

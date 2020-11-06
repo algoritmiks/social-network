@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 //redux
 import {
-  setFollow, setUnfollow, followingChange, getUsers
+  setUnfollow, setFollow, followingChange, getUsers
 } from '../../redux/usersReducer';
 
 //components
@@ -37,7 +37,6 @@ class UsersAPIComponent extends React.Component {
         {this.props.isLoading
           ? <Preloader />
           : <Users totalUsers={this.props.totalUsers}
-            setUsers={this.props.setUsers}
             pageChanged={this.pageChanged}
             currentPage={this.props.currentPage}
             users={this.props.users}
@@ -45,7 +44,6 @@ class UsersAPIComponent extends React.Component {
             setFollow={this.props.setFollow}
             pageSize={this.props.pageSize}
             followingInProgres={this.props.followingInProgres}
-            followingChange = {this.props.followingChange}
           />
         }
       </>

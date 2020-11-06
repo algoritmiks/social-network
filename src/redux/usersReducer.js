@@ -1,4 +1,4 @@
-import { getUsersAPI } from '../api/api';
+import { getUsersAPI, setFollowAPI, setUnfollowAPI } from '../api/api';
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -76,11 +76,11 @@ const usersReducer = (state = initialState, action) => {
   }
 }
 
-export const setFollow = (userID) => ({ type: FOLLOW, userID: userID });
+const makeFollow = (userID) => ({ type: FOLLOW, userID: userID });
 
-export const setUnfollow = (userID) => ({ type: UNFOLLOW, userID: userID });
+const makeUnfollow = (userID) => ({ type: UNFOLLOW, userID: userID });
 
-export const setUsers = (users) => ({ type: SET_USERS, users });
+const setUsers = (users) => ({ type: SET_USERS, users });
 
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage: currentPage });
 
@@ -99,7 +99,30 @@ export const getUsers = (currentPage, pageSize) => (dispatch) => {
     dispatch(setUsers(data.items));
     dispatch(setTotalUsers(data.totalCount));
   });
-
 };
+
+
+export const setUnfollow = (userId) => (dispatch) => {
+  dispatch(followingChange(true, userId));
+  setUnfollowAPI(userId)
+    .then(resultCode => {
+      if (resultCode === 0) {
+        dispatch(makeUnfollow(userId));
+      }
+      dispatch(followingChange(false, userId));
+    })
+}
+
+export const setFollow = (userId) => (dispatch) => {
+  dispatch(followingChange(true, userId));
+  setFollowAPI(userId)
+    .then(resultCode => {
+      if (resultCode === 0) {
+        dispatch(makeFollow(userId));
+      }
+      dispatch(followingChange(false, userId));
+    })
+}
+
 
 export default usersReducer;

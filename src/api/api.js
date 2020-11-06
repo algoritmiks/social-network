@@ -18,14 +18,16 @@ export const getAuth = () => {
     .then( response => response.data);
 }
 
-export const setFollow = (userID) => {
+export const setFollowAPI = (userID) => {
   return axiosRequest.post(`follow/${userID}`)
-    .then(response => response.data.resultCode);
+    .then( response => {
+      return response.data.resultCode;
+    });
 }
 
-export const setUnfollow = (userID) => {
+export const setUnfollowAPI = (userID) => {
   return axiosRequest.delete(`follow/${userID}`)
-    .then(response => response.data.resultCode);
+    .then(response => {
+      return response.data.resultCode;
+    });
 }
-
-
