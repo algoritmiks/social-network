@@ -5,15 +5,9 @@ import Preloader from '../common/preloader/preloader'
 
 //reducers and other functions
 import {
-  setFollow,
-  setUnfollow,
-  setUsers,
-  setCurrentPage,
-  setTotalUsers,
-  setLoading,
-  followingChange
+  setFollow, setUnfollow, followingChange, getUsersThunkCreator
 } from '../../redux/usersReducer';
-import { getUsers } from '../../api/api';
+
 
 //dlls
 import { connect } from 'react-redux';
@@ -27,23 +21,14 @@ class UsersAPIComponent extends React.Component {
   // }
 
   componentDidMount(props) {
-    this.props.setLoading(true);
-
-    getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-        this.props.setLoading(false);
-        this.props.setUsers(data.items);
-        this.props.setTotalUsers(data.totalCount)
-      });
+    const {currentPage, pageSize} = this.props;
+    this.props.getUsers(currentPage, pageSize);
   };
 
 
   pageChanged = (pageNum) => {   //You should use arrow function here, or use bind in constructor
-    this.props.setCurrentPage(pageNum);
-    this.props.setLoading(true);
-    getUsers(pageNum, this.props.pageSize).then(data => {
-        this.props.setLoading(false);
-        this.props.setUsers(data.items);
-      });
+    const {pageSize} = this.props;
+    this.props.getUsers(pageNum, pageSize);
   }
 
   render() {
@@ -80,7 +65,8 @@ const mapStateToProps = (state) => {
 };
 
 const UsersContainer = connect(mapStateToProps,
-  { setFollow, setUnfollow, setUsers, setTotalUsers, setCurrentPage, setLoading, followingChange })(UsersAPIComponent);
+  { setFollow, setUnfollow, followingChange, 
+    getUsers: getUsersThunkCreator })(UsersAPIComponent);
 
 
 export default UsersContainer;

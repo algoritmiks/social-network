@@ -1,3 +1,5 @@
+import { getUsers } from '../api/api';
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -5,6 +7,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS = 'SET_TOTAL_USERS';
 const SET_LOADER = 'SET_LOADER';
 const FOLLOWING_CHANGING = 'FOLLOWING_CHANGING';
+
 
 let initialState = {
   users: [
@@ -86,5 +89,17 @@ export const setTotalUsers = (totalUsers) => ({ type: SET_TOTAL_USERS, totalUser
 export const setLoading = (isLoading) => ({ type: SET_LOADER, isLoading: isLoading });
 
 export const followingChange = (followingInProgres, id) => ({ type: FOLLOWING_CHANGING, followingInProgres, id});
+
+export const getUsersThunkCreator = (currentPage, pageSize) => (dispatch) => {
+  dispatch(setLoading(true));
+  dispatch(setCurrentPage(currentPage));
+
+  getUsers(currentPage, pageSize).then(data => {
+    dispatch(setLoading(false));
+    dispatch(setUsers(data.items));
+    dispatch(setTotalUsers(data.totalCount));
+  });
+
+};
 
 export default usersReducer;
