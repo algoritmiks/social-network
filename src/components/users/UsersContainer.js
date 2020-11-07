@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { compose } from "redux";
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 //redux
@@ -63,10 +64,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-let AuthRedirectComponent = withAuthRedirect(UsersAPIComponent);
-
-const UsersContainer = connect(mapStateToProps,
-  { setFollow, setUnfollow, followingChange, getUsers })(AuthRedirectComponent);
-
-
-export default UsersContainer;
+export default compose(
+  connect( mapStateToProps, {setFollow, setUnfollow, followingChange, getUsers} ),
+  withAuthRedirect
+)(UsersAPIComponent)
