@@ -40,16 +40,7 @@ const Users = (props) => {
           <div>
             <NavLink to={'/profile/' + user.id}>
               <img className={css.ava} src={user.photos.large != null ? user.photos.large : '/img/ava.png'} alt="user"></img>
-            </NavLink>
-          </div>
-          <div>
-            {"user.location.country"}
-          </div>
-          <div>
-            {"user.location.city"}
-          </div>
-          <div>
-            {"user.status"}
+            </NavLink> 
           </div>
           <div>
             {
@@ -64,6 +55,7 @@ const Users = (props) => {
                 }}> Follow </button>
               }
           </div>
+          <br></br>
         </div>)
       }
     </div>

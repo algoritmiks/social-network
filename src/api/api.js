@@ -31,3 +31,10 @@ export const setUnfollowAPI = (userID) => {
       return response.data.resultCode;
     });
 }
+
+
+export const userProfileAPI = {
+  getUsersProfile(userID) {
+    return axiosRequest.get(`profile/${userID}`);
+  }
+}

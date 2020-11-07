@@ -20,7 +20,7 @@ class UsersAPIComponent extends React.Component {
   //   this.pageChanged = this.pageChanged.bind(this);
   // }
 
-  componentDidMount(props) {
+  componentDidMount() {
     const {currentPage, pageSize} = this.props;
     this.props.getUsers(currentPage, pageSize);
   };
