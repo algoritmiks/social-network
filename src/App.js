@@ -9,6 +9,7 @@ import Music from './components/music/Music';
 import Settings from './components/settings/Settings';
 import UsersContainer from './components/users/UsersContainer';
 import ProfileContainer from './components/profile/ProfileContainer';
+import Login from './components/login/Login';
 
 
 function App() {
@@ -29,6 +30,10 @@ function App() {
 
         <Route path='/users' 
           render={ () => <UsersContainer /> } 
+        />
+
+        <Route path = '/login'
+          render = { ()=> <Login /> }
         />
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 //redux
 import {
@@ -32,6 +33,9 @@ class UsersAPIComponent extends React.Component {
   }
 
   render() {
+    if (!this.props.isAuth) {
+      return <Redirect to='/login' />
+    }
     return (
       <>
         {this.props.isLoading
@@ -58,7 +62,8 @@ const mapStateToProps = (state) => {
     totalUsers: state.usersComponent.totalUsers,
     currentPage: state.usersComponent.currentPage,
     isLoading: state.usersComponent.isLoading,
-    followingInProgres: state.usersComponent.followingInProgres
+    followingInProgres: state.usersComponent.followingInProgres,
+    isAuth: state.auth.authorized
   };
 };
 
