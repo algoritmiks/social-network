@@ -8,33 +8,38 @@ const axiosRequest = axios.create({
   headers: getAPIKey()
 });
 
-export const getUsersAPI = (currentPage, pageSize) => {
-  return axiosRequest.get(`users?page=${currentPage}&count=${pageSize}`)
-    .then( response => response.data);
-}
 
-export const getAuth = () => {
-  return axiosRequest.get('auth/me')
-    .then( response => response.data);
-}
 
-export const setFollowAPI = (userID) => {
-  return axiosRequest.post(`follow/${userID}`)
-    .then( response => {
-      return response.data.resultCode;
-    });
-}
-
-export const setUnfollowAPI = (userID) => {
-  return axiosRequest.delete(`follow/${userID}`)
-    .then(response => {
-      return response.data.resultCode;
-    });
+export const authAPI = {
+  getAuth() {
+    return axiosRequest.get('auth/me')
+      .then( response => response.data);
+  }
 }
 
 
-export const userProfileAPI = {
+
+export const usersAPI = {
   getUsersProfile(userID) {
     return axiosRequest.get(`profile/${userID}`);
+  },
+
+  getUsers(currentPage, pageSize) {
+    return axiosRequest.get(`users?page=${currentPage}&count=${pageSize}`)
+      .then( response => response.data);
+  },
+
+  setFollow(userID) {
+    return axiosRequest.post(`follow/${userID}`)
+      .then( response => {
+        return response.data.resultCode;
+      });
+  },
+  
+  setUnfollow (userID) {
+    return axiosRequest.delete(`follow/${userID}`)
+      .then(response => {
+        return response.data.resultCode;
+      });
   }
 }
