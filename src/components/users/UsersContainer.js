@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 //redux
 import {
@@ -33,9 +33,6 @@ class UsersAPIComponent extends React.Component {
   }
 
   render() {
-    if (!this.props.isAuth) {
-      return <Redirect to='/login' />
-    }
     return (
       <>
         {this.props.isLoading
@@ -63,12 +60,13 @@ const mapStateToProps = (state) => {
     currentPage: state.usersComponent.currentPage,
     isLoading: state.usersComponent.isLoading,
     followingInProgres: state.usersComponent.followingInProgres,
-    isAuth: state.auth.authorized
   };
 };
 
+let AuthRedirectComponent = withAuthRedirect(UsersAPIComponent);
+
 const UsersContainer = connect(mapStateToProps,
-  { setFollow, setUnfollow, followingChange, getUsers })(UsersAPIComponent);
+  { setFollow, setUnfollow, followingChange, getUsers })(AuthRedirectComponent);
 
 
 export default UsersContainer;
