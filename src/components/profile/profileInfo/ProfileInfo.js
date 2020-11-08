@@ -1,6 +1,7 @@
 import React from 'react';
 import css from './ProfileInfo.module.css';
 import Preloader from '../../common/preloader/preloader';
+import ProfileStatus from './ProfileStatus';
 // import car from './../img/s1200.jpg';  Как вариант, если пикча лежит не в public/img
 
 const ProfileInfo = (props) => {
@@ -18,6 +19,9 @@ const ProfileInfo = (props) => {
               <img className={css.img_ava} src={props.profile.photos.large || '/img/ava.png'} alt='avatar' />
             </div>
 
+            <div>
+              <ProfileStatus status="hello"/>
+            </div>
             <div>
               <p>Full name: {props.profile.fullName}</p>
               <p>Contacts</p>
