@@ -1,13 +1,12 @@
 import * as axios from 'axios';
-import { getBaseAPIURL, getAPIKey } from '../constants/constants'
+import { parametersAPI } from '../constants/constants'
 
 
 const axiosRequest = axios.create({
-  baseURL: getBaseAPIURL(),
+  baseURL: parametersAPI.getBaseAPIURL(),
   withCredentials: true,
-  headers: getAPIKey()
+  headers: parametersAPI.getAPIKey()
 });
-
 
 
 export const authAPI = {
@@ -18,10 +17,10 @@ export const authAPI = {
 }
 
 
-
 export const usersAPI = {
-  getUsersProfile(userID) {
-    return axiosRequest.get(`profile/${userID}`);
+  getUsersProfile(userId) {
+    console.warn('Obsolete method, please use profileAPI object')
+    return profileAPI.getUsersProfile(userId);
   },
 
   getUsers(currentPage, pageSize) {
@@ -29,17 +28,34 @@ export const usersAPI = {
       .then( response => response.data);
   },
 
-  setFollow(userID) {
-    return axiosRequest.post(`follow/${userID}`)
+  setFollow(userId) {
+    return axiosRequest.post(`follow/${userId}`)
       .then( response => {
         return response.data.resultCode;
       });
   },
   
-  setUnfollow (userID) {
-    return axiosRequest.delete(`follow/${userID}`)
+  setUnfollow (userId) {
+    return axiosRequest.delete(`follow/${userId}`)
       .then(response => {
         return response.data.resultCode;
       });
+  }
+}
+
+
+export const profileAPI = {
+  getUsersProfile(userId) {
+    return axiosRequest.get(`profile/${userId}`);
+  },
+
+  getUserStatus(userId) {
+    return axiosRequest.get(`profile/status/${userId}`);
+  },
+
+  updateUserStatus(status) {
+    return axiosRequest.put('profile/status', {
+      status: status
+    });
   }
 }

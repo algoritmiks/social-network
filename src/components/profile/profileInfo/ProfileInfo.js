@@ -20,12 +20,15 @@ const ProfileInfo = (props) => {
             </div>
 
             <div>
-              <ProfileStatus status="hello"/>
+              <ProfileStatus 
+                userStatus = {props.userStatus} 
+                updateUserStatus = {props.updateUserStatus}  
+              />
             </div>
             <div>
               <p>Full name: {props.profile.fullName}</p>
               <p>Contacts</p>
-              <p> github: <a href={props.profile.contacts.github}> {props.profile.contacts.github} </a></p>
+              <p>github: <a href={props.profile.contacts.github}> {props.profile.contacts.github} </a></p>
             </div>
         </div>
     );
