@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { compose } from "redux";
 
 import Dialogs from './Dialogs';
-import { updateNewMessageTextActionCreate, newMessageActionCreate } from '../../redux/dialogsReducer';
+import { newMessageAdd } from '../../redux/dialogsReducer';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 const mapStateToProps = (state) => {
@@ -13,21 +13,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        newMessageSend: () => {
-            let action = newMessageActionCreate();
-            dispatch(action);
-        },
-        updateText: (text) => {
-            let action = updateNewMessageTextActionCreate(text);
+        newMessageSend: (newMessage) => {
+            let action = newMessageAdd(newMessage);
             dispatch(action);
         }
-
     };
 };
 
 export default compose(
   withAuthRedirect,
   connect(mapStateToProps, mapDispatchToProps)
+  // connect(mapStateToProps, {newMessageAdd})
 )(Dialogs)
 
 
