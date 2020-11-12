@@ -1,11 +1,14 @@
 import React from 'react';
-import css from './MyPosts.module.css';
-import Post from './post/Post';
 import { reduxForm, Field } from 'redux-form';
+import css from './MyPosts.module.css';
+
+import Post from './post/Post';
+import {requiredField, checkMaxLength} from '../../../helpers/validators/validator';
+import { Textarea } from '../../common/FormsControls/FormsControls';
 
 
 const MyPosts = (props) => {
-    let postsArray = props.profileComponent.postsData.map( post => <Post msg={post.post} key={post.id} likes={post.likes} /> );
+    let postsArray = props.profileComponent.postsData.map( (post, ind) => <Post msg={post.post} key={ind} likes={post.likes} /> );
 
     const addPost = (values) => {
         props.newPost(values.newPostText);
@@ -18,14 +21,20 @@ const MyPosts = (props) => {
             { postsArray }
         </div>
     );
-}
-
-
-const AddNewPostForm = (props) => {
-  return (
-    <form onSubmit={props.handleSubmit}>
+  }
+  
+  
+  const maxLengthCreator = checkMaxLength(10);
+  
+  const AddNewPostForm = (props) => {
+    return (
+      <form onSubmit={props.handleSubmit}>
       <div>
-        <Field component="textarea" placeholder="enter your post here" name="newPostText" />
+        <Field component={Textarea} 
+          placeholder="enter your post here" 
+          name="newPostText" 
+          validate={[requiredField, maxLengthCreator]} 
+        />
       </div>
       <div>
         <button>Add post</button>
