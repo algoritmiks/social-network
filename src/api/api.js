@@ -13,6 +13,14 @@ export const authAPI = {
   getAuth() {
     return axiosRequest.get('auth/me')
       .then( response => response.data);
+  },
+
+  login(email, password, rememberMe=false) {
+    return axiosRequest.post('auth/login', {email, password, rememberMe})
+  },
+
+  logout() {
+    return axiosRequest.delete('auth/login')
   }
 }
 

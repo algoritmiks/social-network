@@ -9,7 +9,11 @@ const Header = (props) => {
           <img src="/img/logo.png" alt="logo" />
         </div>
         <div className={css.login}>
-          {props.authorized ? props.login : <NavLink to="/login">Login</NavLink>}
+          {props.authorized 
+            ? <div> 
+                {props.login} - <button onClick={props.logout}>Logout</button>
+              </div>
+            : <NavLink to="/login">Login</NavLink>}
         </div>
       </header>
     );
