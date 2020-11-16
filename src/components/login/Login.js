@@ -5,6 +5,7 @@ import { Input } from '../common/FormsControls/FormsControls';
 import { login } from '../../redux/authReducer';
 import { connect } from 'react-redux';
 import {Redirect} from "react-router-dom";
+import css from '../common/FormsControls/FormsControls.module.css';
 
 const maxLengthCreator = checkMaxLength(50);
 
@@ -35,6 +36,7 @@ const LoginForm = (props) => {
           name={"rememberMe"}
         /> remember me
     </div>
+      {props.error && <div className={css.error} > {props.error} </div>}
       <div>
         <button type={"submit"}>Login</button>
       </div>

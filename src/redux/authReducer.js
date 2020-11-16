@@ -1,3 +1,4 @@
+import { stopSubmit } from 'redux-form';
 import { authAPI } from '../api/api';
 
 const SET_USER_DATA="SET_USER_DATA";
@@ -45,10 +46,15 @@ export const getAuthData = () => (dispatch) => {
 
 export const login = (email, password, rememberMe) => (dispatch) => {
   authAPI.login(email, password, rememberMe)
-    .then(data => {
-      if (!data.resultCode) {
-        dispatch(getAuthData());
-      }
+  .then(res => {
+    if (!res.data.resultCode) {
+      dispatch(getAuthData());
+    } else {
+      debugger
+      const msg = res.data.messages.length > 0 ? res.data.messages[0] : 'wrong auth data';
+      console.log(res.data.messages[0]);
+      dispatch(stopSubmit('login', {_error: msg}));
+    }
     });
 };
 
@@ -56,7 +62,7 @@ export const login = (email, password, rememberMe) => (dispatch) => {
 export const logout = () => (dispatch) => {
   authAPI.logout()
     .then(data => {
-      if (!data.resultCode) {
+      if (!data.data.resultCode) {
         dispatch(setUserData(null, null, null, false));
       }
     });
