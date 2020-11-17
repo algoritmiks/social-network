@@ -10,7 +10,7 @@ import {
 
 //components
 import Users from './Users';
-import Preloader from '../common/preloader/preloader'
+import Preloader from '../common/preloader/Preloader'
 
 
 
