@@ -50,9 +50,7 @@ export const login = (email, password, rememberMe) => (dispatch) => {
     if (!res.data.resultCode) {
       dispatch(getAuthData());
     } else {
-      debugger
       const msg = res.data.messages.length > 0 ? res.data.messages[0] : 'wrong auth data';
-      console.log(res.data.messages[0]);
       dispatch(stopSubmit('login', {_error: msg}));
     }
     });
@@ -61,8 +59,8 @@ export const login = (email, password, rememberMe) => (dispatch) => {
 
 export const logout = () => (dispatch) => {
   authAPI.logout()
-    .then(data => {
-      if (!data.data.resultCode) {
+    .then(res => {
+      if (!res.data.resultCode) {
         dispatch(setUserData(null, null, null, false));
       }
     });
