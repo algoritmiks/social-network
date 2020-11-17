@@ -2,7 +2,6 @@ import React from 'react';
 import preloader from './preloader.svg'  //Shouldn't use this import with alternate preloader
 
 const Preloader = (props) => {
-
     return (
       <div style={{backgroundColor: 'white'}}>  
         <img src={preloader} alt="preloader"/>   

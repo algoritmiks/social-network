@@ -1,6 +1,6 @@
 import React from 'react';
 import css from './ProfileInfo.module.css';
-import Preloader from '../../common/preloader/preloader';
+import Preloader from '../../common/preloader/Preloader';
 import ProfileStatus from './ProfileStatus';
 // import car from './../img/s1200.jpg';  Как вариант, если пикча лежит не в public/img
 
