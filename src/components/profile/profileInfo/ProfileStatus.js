@@ -1,51 +1,38 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-class ProfileStatus extends React.Component {
-  state = {
-    editMode: false,
-    userStatus: this.props.userStatus
-  }
 
-  toggleUserStatus = (editMode) => {
-    this.setState({
-      editMode: editMode
-    })
+const ProfileStatus = (props) => {
+  let [editMode, setEditMode] = useState(false);
+  let [userStatus, setUserStatus] = useState(props.userStatus);
+
+
+  const toggleUserStatus = (mode) => {
+    setEditMode(mode);
   } 
 
-  updateUserStatus = (editMode) => {
-    this.toggleUserStatus(editMode);
-    this.props.updateUserStatus(this.state.userStatus);
+  const changeUserStatus = (e) => {
+    setUserStatus(e.currentTarget.value)
   }
 
-  changeUserStatus = (e) => {
-    this.setState({
-      userStatus: e.currentTarget.value
-    });
+  const updateUserStatus = (editMode) => {
+    toggleUserStatus(editMode);
+    props.updateUserStatus(userStatus);
   }
 
-  componentDidUpdate = (previousProps, previousState) => {
-    if (previousProps.userStatus !== this.props.userStatus) {
-      this.setState({
-        userStatus: this.props.userStatus
-      })
-    }
-  }
 
-  render() {
     return (
       <div>
-          {(!this.state.editMode && 
+          {(!editMode && 
           <div>
-            <span onDoubleClick = { () => this.toggleUserStatus(true) }>{this.props.userStatus || 'No status'}</span>
+            <span onDoubleClick = { () => toggleUserStatus(true) }>{props.userStatus || 'No status'}</span>
           </div>)
           ||
           <div>
-            <input onChange={this.changeUserStatus} autoFocus={true} onBlur={ () => this.updateUserStatus(false) } value={this.state.userStatus} />
+            <input onChange={changeUserStatus} autoFocus={true} onBlur={ () => updateUserStatus(false) } value={userStatus} />
           </div>
           }
       </div>
     )
-  }
 };
   
   export default ProfileStatus
