@@ -1,18 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from "redux";
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
-//redux
-import {
-  setUnfollow, setFollow, followingChange, getUsers
-} from '../../redux/usersReducer';
-
-//components
 import Users from './Users';
 import Preloader from '../common/preloader/Preloader'
-
-
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { setUnfollow, setFollow, followingChange, getUsers } from '../../redux/usersReducer';
+import { getUsersFromState, getPageSizeFromState, getTotalUsersFromState,
+        getCurrentPageFromState, getIsLoadingFromState, getFollowingInProgresFromState } from '../../redux/usersSelectors';
 
 
 class UsersAPIComponent extends React.Component {
@@ -55,12 +50,12 @@ class UsersAPIComponent extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    users: state.usersComponent.users,
-    pageSize: state.usersComponent.pageSize,
-    totalUsers: state.usersComponent.totalUsers,
-    currentPage: state.usersComponent.currentPage,
-    isLoading: state.usersComponent.isLoading,
-    followingInProgres: state.usersComponent.followingInProgres,
+    users: getUsersFromState(state),
+    pageSize: getPageSizeFromState(state),
+    totalUsers: getTotalUsersFromState(state),
+    currentPage: getCurrentPageFromState(state),
+    isLoading: getIsLoadingFromState(state),
+    followingInProgres: getFollowingInProgresFromState(state),
   };
 };
 
