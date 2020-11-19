@@ -90,38 +90,34 @@ export const setLoading = (isLoading) => ({ type: SET_LOADER, isLoading: isLoadi
 
 export const followingChange = (followingInProgres, id) => ({ type: FOLLOWING_CHANGING, followingInProgres, id});
 
-export const getUsers = (currentPage, pageSize) => (dispatch) => {
+export const getUsers = (currentPage, pageSize) => async(dispatch) => {
   dispatch(setLoading(true));
   dispatch(setCurrentPage(currentPage));
-
-  usersAPI.getUsers(currentPage, pageSize).then(data => {
-    dispatch(setLoading(false));
-    dispatch(setUsers(data.items));
-    dispatch(setTotalUsers(data.totalCount));
-  });
+  const data = await usersAPI.getUsers(currentPage, pageSize);
+  dispatch(setLoading(false));
+  dispatch(setUsers(data.items));
+  dispatch(setTotalUsers(data.totalCount));
 };
 
 
-export const setUnfollow = (userId) => (dispatch) => {
+export const setUnfollow = (userId) => async (dispatch) => {
   dispatch(followingChange(true, userId));
-  usersAPI.setUnfollow(userId)
-    .then(resultCode => {
-      if (resultCode === 0) {
-        dispatch(makeUnfollow(userId));
-      }
-      dispatch(followingChange(false, userId));
-    })
+  const resultCode = await usersAPI.setUnfollow(userId);
+    
+  if (resultCode === 0) {
+    dispatch(makeUnfollow(userId));
+  }
+  dispatch(followingChange(false, userId));
 }
 
-export const setFollow = (userId) => (dispatch) => {
+export const setFollow = (userId) => async (dispatch) => {
   dispatch(followingChange(true, userId));
-  usersAPI.setFollow(userId)
-    .then(resultCode => {
-      if (resultCode === 0) {
-        dispatch(makeFollow(userId));
-      }
-      dispatch(followingChange(false, userId));
-    })
+  const resultCode = await usersAPI.setFollow(userId)
+
+  if (resultCode === 0) {
+    dispatch(makeFollow(userId));
+  }
+  dispatch(followingChange(false, userId));
 }
 
 
