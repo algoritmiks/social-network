@@ -7,13 +7,12 @@ import {requiredField, checkMaxLength} from '../../../helpers/validators/validat
 import { Textarea } from '../../common/FormsControls/FormsControls';
 
 
-const MyPosts = (props) => {
-    let postsArray = props.profileComponent.postsData.map( (post, ind) => <Post msg={post.post} key={ind} likes={post.likes} /> );
+const MyPosts = React.memo((props) => {
+    let postsArray = props.postsData.map( (post, ind) => <Post msg={post.post} key={ind} likes={post.likes} /> );
 
     const addPost = (values) => {
         props.newPost(values.newPostText);
     };
-    
     return (
         <div className={css.myPostsBlock}>
             <h3>My posts</h3>
@@ -21,8 +20,29 @@ const MyPosts = (props) => {
             { postsArray }
         </div>
     );
-  }
+  })
+
+// class MyPosts extends React.PureComponent{  //You should use shouldComponentUpdate() or PureComponent
+//   // shouldComponentUpdate(nextProps, nextStat) {
+//   //   return this.props !== nextProps
+//   // }
+
+//   postsArray = this.props.postsData.map( (post, ind) => <Post msg={post.post} key={ind} likes={post.likes} /> );
+
+//   addPost = (values) => {
+//       this.props.newPost(values.newPostText);
+//   };
   
+//   render() {
+//     return (
+//         <div className={css.myPostsBlock}>
+//             <h3>My posts</h3>
+//             <ReduxAddNewPostForm onSubmit={this.addPost}/>
+//             { this.postsArray }
+//         </div>
+//     );
+//   }
+// }
   
   const maxLengthCreator = checkMaxLength(10);
   
