@@ -1,7 +1,6 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
-import Paginator from '../common/paginator/Paginator';
 import css from './Users.module.css'
+import { NavLink } from 'react-router-dom';
 
 // "name": "anatoliy",
 //             "id": 5358,
@@ -15,15 +14,24 @@ import css from './Users.module.css'
 
 
 const Users = (props) => {
+  let pagesCount = Math.ceil(props.totalUsers / props.pageSize);
+  let pages = [];
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i);
+  }
+
+  const changeCurrentPage = (e) => {
+    if (e.target.tagName === "SPAN") {
+      props.pageChanged(Number(e.target.textContent))
+    }
+  }
 
   return (
     <div>
-      <Paginator 
-        totalUsers = {props.totalUsers}
-        pageSize = { props.pageSize }
-        pageChanged = { props.pageChanged }
-        currentPage = { props.currentPage }
-      />
+      <div onClick={changeCurrentPage}>
+        {pages.map(page => <span className={props.currentPage === page && css.active}> {page} </span>)}
+      </div>
+
       {props.users.map(user =>
         <div>
           <div>

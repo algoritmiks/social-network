@@ -5,7 +5,7 @@ import css from './Dialogs.module.css';
 import DialogItem from './dialogItem/DialogItem';
 import Message from './message/Message';
 import {requiredField, checkMaxLength} from '../../helpers/validators/validator';
-import { Textarea } from '../common/FormsControls/FormsControls';
+import { Textarea } from '../common/formsControls/FormsControls';
 
 
 const Dialogs = (props) => {

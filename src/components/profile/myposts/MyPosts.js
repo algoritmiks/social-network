@@ -4,7 +4,7 @@ import css from './MyPosts.module.css';
 
 import Post from './post/Post';
 import {requiredField, checkMaxLength} from '../../../helpers/validators/validator';
-import { Textarea } from '../../common/FormsControls/FormsControls';
+import { Textarea } from '../../common/formsControls/FormsControls';
 
 
 const MyPosts = React.memo((props) => {
