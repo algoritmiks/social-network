@@ -31,9 +31,9 @@ class UsersAPIComponent extends React.Component {
   render() {
     return (
       <>
-        {this.props.isLoading
-          ? <Preloader />
-          : <Users totalUsers={this.props.totalUsers}
+        {this.props.isLoading ? <Preloader /> : null}
+
+          <Users totalUsers={this.props.totalUsers}
             pageChanged={this.pageChanged}
             currentPage={this.props.currentPage}
             users={this.props.users}
@@ -42,7 +42,6 @@ class UsersAPIComponent extends React.Component {
             pageSize={this.props.pageSize}
             followingInProgres={this.props.followingInProgres}
           />
-        }
       </>
     );
   }
