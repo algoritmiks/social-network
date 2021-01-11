@@ -10,15 +10,16 @@ import store from './redux/reduxStore';
 import './App.css';
 import HeaderContainer from './components/header/HeaderContainer';
 import Navbar from './components/navbar/Navbar';
-import DialogsContainer from './components/dialogs/DialogsContainer';
 import News from './components/news/News';
 import Music from './components/music/Music';
 import Settings from './components/settings/Settings';
 import UsersContainer from './components/users/UsersContainer';
-import ProfileContainer from './components/profile/ProfileContainer';
 import Login from './components/login/Login';
 import { initializeApp } from './redux/appReducer';
 import Preloader from './components/common/preloader/Preloader';
+import { withSuspense } from './hoc/withSuspense';
+const ProfileContainer = React.lazy(() => import('./components/profile/ProfileContainer'));
+const DialogsContainer = React.lazy(() => import('./components/dialogs/DialogsContainer'));
 
 
 
@@ -38,10 +39,10 @@ class App extends React.Component {
                 <Navbar />
                 <div className="mainWindow__content">
                     <Route path='/profile/:userID?'
-                        render={() => <ProfileContainer />}
+                        render={withSuspense(ProfileContainer)}
                     />
                     <Route exact path='/dialogs'
-                        render={() => <DialogsContainer />}
+                        render={withSuspense(DialogsContainer)}
                     />
                     <Route path='/news' component={News} />
                     <Route path='/music' component={Music} />
