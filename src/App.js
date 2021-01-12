@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from "redux";
 import { withRouter } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/reduxStore';
 
@@ -38,7 +38,7 @@ class App extends React.Component {
                 <HeaderContainer />
                 <Navbar />
                 <div className="mainWindow__content">
-                    <Route path='/profile/:userID?'
+                    <Route path='/profile/:userId?'
                         render={withSuspense(ProfileContainer)}
                     />
                     <Route exact path='/dialogs'
@@ -70,11 +70,11 @@ const AppContainer = compose(
     connect(mapStateToProps, { initializeApp }))(App);
 
 const SocialNetwork = (props) => {
-    return <BrowserRouter>
+    return <HashRouter>
         <Provider store={store}>
             <AppContainer />
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 
 export default SocialNetwork
