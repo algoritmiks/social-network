@@ -1,9 +1,7 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { HashRouter, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from "redux";
-import { withRouter } from 'react-router-dom';
-import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/reduxStore';
 

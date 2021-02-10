@@ -9,6 +9,10 @@ const ProfileInfo = (props) => {
         return <Preloader />
     }
 
+    const onUploadImage = (e) => {
+        props.uploadPhoto(e.target.files[0]);
+    }
+
     return (
         <div>
             <div>
@@ -19,10 +23,15 @@ const ProfileInfo = (props) => {
               <img className={css.img_ava} src={props.profile.photos.large || '/img/ava.png'} alt='avatar' />
             </div>
 
+            <div className={css.upload_file}>
+                { !props.userId ? <input type={"file"} onChange={onUploadImage}/> : null}
+            </div>
+
             <div>
               <ProfileStatus 
                 userStatus = {props.userStatus} 
                 updateUserStatus = {props.updateUserStatus}  
+                userId = {props.userId}
               />
             </div>
             <div>
