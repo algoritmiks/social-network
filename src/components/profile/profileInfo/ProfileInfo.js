@@ -34,13 +34,50 @@ const ProfileInfo = (props) => {
                 userId = {props.userId}
               />
             </div>
+
+            <ProfileData {...props}/>
+            
+        </div>
+        
+    );
+}
+
+const ProfileData = (props) => {
+    return (
+        <div>
             <div>
-              <p>Full name: {props.profile.fullName}</p>
-              <p>Contacts</p>
-              <p>github: <a href={props.profile.contacts.github}> {props.profile.contacts.github} </a></p>
+                <p><b>Full name: </b>{props.profile.fullName}</p>
+            </div>
+
+            <div>
+                <b>Looking for a job: </b> {props.profile.lookingForAJob ? "Yes" : "No"}
+            </div>
+
+            {props.profile.lookingForAJob &&
+                <div>
+                    Job decription: {props.profile.lookingForAJobDescription}
+                </div>
+            }
+
+            <div>
+                <p><b>Contacts:</b></p>
+
+                {Object.keys(props.profile.contacts).map(key => {
+                    return <Contact description = {key}
+                                    value = {props.profile.contacts[key]} 
+                                    key = {key} />
+                })}
             </div>
         </div>
-    );
+    )
+}
+
+const Contact = ({description, value}) => {
+    return (
+        <div>
+            <p className = {css.contacts}><b>{description}:</b> {value} </p>
+        </div>
+    )
 }
 
 export default ProfileInfo;

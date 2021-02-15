@@ -31,11 +31,11 @@ const ProfileStatus = (props) => {
       <div>
           {(!editMode && 
           <div>
-            <span onDoubleClick = { () => toggleUserStatus(true) }>{props.userStatus || 'No status'}</span>
+          <span><b>User status: </b></span><span onDoubleClick = { () => toggleUserStatus(true) }>{props.userStatus || 'No status'}</span>
           </div>)
           ||
           <div>
-            <input onChange={changeUserStatus} autoFocus={true} onBlur={ () => updateUserStatus(false) } value={userStatus} />
+          <span><b>User status: </b></span><input onChange={changeUserStatus} autoFocus={true} onBlur={ () => updateUserStatus(false) } value={userStatus} />
           </div>
           }
       </div>
