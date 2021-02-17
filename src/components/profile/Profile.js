@@ -13,6 +13,7 @@ const Profile = (props) => {
               updateUserStatus = {props.updateUserStatus}
               userId = {props.match.params.userId}
               uploadPhoto = {props.uploadPhoto}
+              saveProfileData = {props.saveProfileData}
             />
             <MyPostsContainer />
         </div>

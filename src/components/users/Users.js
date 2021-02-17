@@ -25,7 +25,7 @@ const Users = (props) => {
         currentPage = { props.currentPage }
       />
       {props.users.map(user =>
-        <div>
+        <div key={user.id}>
           <div>
             {user.name}
           </div>

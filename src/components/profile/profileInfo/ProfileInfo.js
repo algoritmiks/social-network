@@ -1,16 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import css from './ProfileInfo.module.css';
 import Preloader from '../../common/preloader/Preloader';
 import ProfileStatus from './ProfileStatus';
+import ReduxProfileDataForm from './ProfileDataForm';
 // import car from './../img/s1200.jpg';  Как вариант, если пикча лежит не в public/img
 
 const ProfileInfo = (props) => {
+    let [editMode, setEditMode] = useState(false);
+    
+
     if(!props.profile){
         return <Preloader />
     }
 
     const onUploadImage = (e) => {
         props.uploadPhoto(e.target.files[0]);
+    }
+
+    const onSubmitProfileData = (formData) => {
+        props.saveProfileData(formData)
+            .then(() => setEditMode(false));
     }
 
     return (
@@ -35,7 +44,16 @@ const ProfileInfo = (props) => {
               />
             </div>
 
-            <ProfileData {...props}/>
+            { !props.userId && !editMode
+                ? <div>
+                     <button onClick = { () => setEditMode(true) }>Edit</button>
+                  </div>
+                : null
+            }
+
+            { editMode 
+                ? <ReduxProfileDataForm initialValues = {props.profile} profile = {props.profile} onSubmit={ onSubmitProfileData }/> 
+                : <ProfileData {...props}/> }
             
         </div>
         
@@ -50,12 +68,16 @@ const ProfileData = (props) => {
             </div>
 
             <div>
-                <b>Looking for a job: </b> {props.profile.lookingForAJob ? "Yes" : "No"}
+                <p><b>About me:</b> {props.profile.aboutMe}</p>
+            </div>
+
+            <div>
+                <p><b>Looking for a job: </b> {props.profile.lookingForAJob ? "Yes" : "No"}</p>
             </div>
 
             {props.profile.lookingForAJob &&
                 <div>
-                    Job decription: {props.profile.lookingForAJobDescription}
+                    <p><b>Job decription: </b>{props.profile.lookingForAJobDescription}</p>
                 </div>
             }
 
@@ -71,6 +93,8 @@ const ProfileData = (props) => {
         </div>
     )
 }
+
+
 
 const Contact = ({description, value}) => {
     return (
