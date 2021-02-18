@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Route, withRouter } from 'react-router-dom';
+import { HashRouter, Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from "redux";
 import { Provider } from 'react-redux';
@@ -36,23 +36,26 @@ class App extends React.Component {
                 <HeaderContainer />
                 <Navbar />
                 <div className="mainWindow__content">
-                    <Route path='/profile/:userId?'
-                        render={withSuspense(ProfileContainer)}
-                    />
-                    <Route exact path='/dialogs'
-                        render={withSuspense(DialogsContainer)}
-                    />
-                    <Route path='/news' component={News} />
-                    <Route path='/music' component={Music} />
-                    <Route path='/settings' component={Settings} />
+                    <Switch>
+                        <Route path='/profile/:userId?'
+                            render={withSuspense(ProfileContainer)}
+                        />
+                        <Route exact path='/dialogs'
+                            render={withSuspense(DialogsContainer)}
+                        />
+                        <Route path='/news' component={News} />
+                        <Route path='/music' component={Music} />
+                        <Route path='/settings' component={Settings} />
 
-                    <Route path='/users'
-                        render={() => <UsersContainer />}
-                    />
+                        <Route path='/users'
+                            render={() => <UsersContainer />}
+                        />
 
-                    <Route path='/login'
-                        render={() => <Login />}
-                    />
+                        <Route path='/login'
+                            render={() => <Login />}
+                        />
+                        <Redirect from="/" to="/profile" /> 
+                    </Switch>
                 </div>
             </div>
         );

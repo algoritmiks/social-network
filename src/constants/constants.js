@@ -1,6 +1,6 @@
 export const parametersAPI = {
   getAPIKey() { 
-    return {"API-KEY": "c08b5ba3-382a-457d-9f87-b9c7700e05da"};
+    return {"API-KEY": "1fff90c7-e902-4c8a-8622-c78f87faab12"};
   },
 
   getBaseAPIURL() {
