@@ -15,12 +15,19 @@ export const authAPI = {
             .then(response => response.data);
     },
 
-    login(email, password, rememberMe = false) {
-        return axiosRequest.post('auth/login', { email, password, rememberMe })
+    login(email, password, rememberMe = false, captcha = null) {
+        return axiosRequest.post('auth/login', { email, password, rememberMe, captcha })
     },
 
     logout() {
         return axiosRequest.delete('auth/login')
+    }
+}
+
+export const securityAPI = {
+    getCaptchaURL() {
+        return axiosRequest.get('security/get-captcha-url')
+        .then(response => response.data);
     }
 }
 
