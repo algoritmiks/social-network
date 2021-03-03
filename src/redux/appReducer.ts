@@ -1,12 +1,16 @@
 import { getAuthData } from './authReducer';
 
-const SET_INIT_APP="SET_INIT_APP";
+const SET_INIT_APP = "SET_INIT_APP";
 
-let initialState = {
+export type StateType = {
+    appInit: boolean;
+}
+
+const initialState = {
   appInit: false
 };
 
-const appReducer = (state=initialState, action) => {
+const appReducer = (state=initialState, action: InitAppActionCreator):StateType => {
     switch(action.type) { 
         case SET_INIT_APP:
             return { ...state, appInit: true };
@@ -16,15 +20,14 @@ const appReducer = (state=initialState, action) => {
 };
 
 
-const initApp = () => {
-  return {
-    type: SET_INIT_APP,
-    appInit: true
-  }
-};
+type InitAppActionCreator = {
+    type: typeof SET_INIT_APP;
+}
+
+const initApp = ():InitAppActionCreator => ({type: SET_INIT_APP});
 
 
-export const initializeApp = () => (dispatch) => {
+export const initializeApp = () => (dispatch: any) => {
   const promise = dispatch(getAuthData());
   Promise.all([promise])
     .then(() => {
