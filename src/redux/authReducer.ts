@@ -15,7 +15,7 @@ let initialState = {
 
 type StateType = typeof initialState;
 
-const authReducer = (state = initialState, action: SetUserDataActionCreatorType | SetCaptchaURLActionCreatorType): StateType => {
+const authReducer = (state = initialState, action: SetUserDataActionType | SetCaptchaURLActionType): StateType => {
     switch (action.type) {
         case SET_USER_DATA:
             return { ...state, ...action.payload };
@@ -33,12 +33,12 @@ type PayLoadDataType = {
     authorized: boolean,
 }
 
-type SetUserDataActionCreatorType = {
+type SetUserDataActionType = {
     type: typeof SET_USER_DATA,
     payload: PayLoadDataType
 }
 
-const setUserData = (id: number | null, login: string | null, email: string | null, authorized: boolean): SetUserDataActionCreatorType => {
+const setUserData = (id: number | null, login: string | null, email: string | null, authorized: boolean): SetUserDataActionType => {
     return {
         type: SET_USER_DATA,
         payload: {
@@ -50,12 +50,12 @@ const setUserData = (id: number | null, login: string | null, email: string | nu
     }
 };
 
-type SetCaptchaURLActionCreatorType = {
+type SetCaptchaURLActionType = {
     type: typeof SET_CAPTCHA_URL,
     captchaURL: string
 }
 
-const setCaptchaURL = (captchaURL: string): SetCaptchaURLActionCreatorType => {
+const setCaptchaURL = (captchaURL: string): SetCaptchaURLActionType => {
     return { type: SET_CAPTCHA_URL, captchaURL }
 };
 
