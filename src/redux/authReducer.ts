@@ -9,7 +9,7 @@ let initialState = {
     id: null as number | null,
     login: null as string | null,
     email: null as string | null,
-    authorized: false as boolean,
+    authorized: false,
     captchaURL: null as string | null
 };
 
