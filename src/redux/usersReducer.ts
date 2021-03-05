@@ -1,4 +1,7 @@
+import { UserType } from '../types/types';
 import { usersAPI } from '../api/api';
+
+
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -15,7 +18,7 @@ let initialState = {
     // { id: 2, avaSrc: '/img/ava.png', follow: false, fullName: "Misha", status: "free for chat", location: {country:"Russia", city: "Yaroslavl"} },
     // { id: 3, avaSrc: '/img/ava2.jpg', follow: false, fullName: "Dima", status: "free for chat", location: {country:"Russia", city: "Piter"} },
     // { id: 4, avaSrc: '/img/ava4.png', follow: true, fullName: "Katya", status: "learning", location: {country:"Russia", city: "Piter"} },
-  ],
+  ] as Array<UserType>,
   totalUsers: 0,
   pageSize: 5,
   currentPage: 1,
@@ -24,9 +27,7 @@ let initialState = {
 };
 
 
-
-
-const usersReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case FOLLOW:
       return {
@@ -76,21 +77,50 @@ const usersReducer = (state = initialState, action) => {
   }
 }
 
-const makeFollow = (userID) => ({ type: FOLLOW, userID: userID });
+type MakeFollowActionType = {
+    type: typeof FOLLOW,
+    userID: number
+}
+const makeFollow = (userID: number): MakeFollowActionType => ({ type: FOLLOW, userID: userID });
 
-const makeUnfollow = (userID) => ({ type: UNFOLLOW, userID: userID });
+type MakeUnfollowActionType = {
+    type: typeof UNFOLLOW,
+    userID: number
+}
+const makeUnfollow = (userID: number): MakeUnfollowActionType => ({ type: UNFOLLOW, userID: userID });
 
-const setUsers = (users) => ({ type: SET_USERS, users });
+type SetUsersActionType = {
+    type: typeof SET_USERS,
+    users: Array<UserType>
+}
+const setUsers = (users: Array<UserType>): SetUsersActionType => ({ type: SET_USERS, users });
 
-export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage: currentPage });
+type SetCurrentPageActionType = {
+    type: typeof SET_CURRENT_PAGE,
+    currentPage: number
+}
+export const setCurrentPage = (currentPage: number): SetCurrentPageActionType => ({ type: SET_CURRENT_PAGE, currentPage: currentPage });
 
-export const setTotalUsers = (totalUsers) => ({ type: SET_TOTAL_USERS, totalUsers: totalUsers });
+type SetTotalUsersActionType = {
+    type: typeof SET_TOTAL_USERS,
+    totalUsers: number
+}
+export const setTotalUsers = (totalUsers: number): SetTotalUsersActionType => ({ type: SET_TOTAL_USERS, totalUsers: totalUsers });
 
-export const setLoading = (isLoading) => ({ type: SET_LOADER, isLoading: isLoading });
+type SetLoadingActionType = {
+    type: typeof SET_LOADER,
+    isLoading: boolean
+}
+export const setLoading = (isLoading: boolean): SetLoadingActionType => ({ type: SET_LOADER, isLoading: isLoading });
 
-export const followingChange = (followingInProgres, id) => ({ type: FOLLOWING_CHANGING, followingInProgres, id});
+type FollowingChangeActionType = {
+    type: typeof FOLLOWING_CHANGING,
+    followingInProgres: boolean,
+    id: number
+}
+export const followingChange = (followingInProgres: boolean, id: number): FollowingChangeActionType => ({ type: FOLLOWING_CHANGING, followingInProgres, id});
 
-export const getUsers = (currentPage, pageSize) => async(dispatch) => {
+export const getUsers = (currentPage: number, pageSize: number) => async(dispatch: any) => {
   dispatch(setLoading(true));
   dispatch(setCurrentPage(currentPage));
   const data = await usersAPI.getUsers(currentPage, pageSize);
@@ -100,7 +130,7 @@ export const getUsers = (currentPage, pageSize) => async(dispatch) => {
 };
 
 
-export const setUnfollow = (userId) => async (dispatch) => {
+export const setUnfollow = (userId: number) => async (dispatch: any) => {
   dispatch(followingChange(true, userId));
   const resultCode = await usersAPI.setUnfollow(userId);
     
@@ -110,7 +140,7 @@ export const setUnfollow = (userId) => async (dispatch) => {
   dispatch(followingChange(false, userId));
 }
 
-export const setFollow = (userId) => async (dispatch) => {
+export const setFollow = (userId: number) => async (dispatch: any) => {
   dispatch(followingChange(true, userId));
   const resultCode = await usersAPI.setFollow(userId)
 
