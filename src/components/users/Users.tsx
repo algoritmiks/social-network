@@ -1,20 +1,21 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 import Paginator from '../common/paginator/Paginator';
+import { UserType } from '../../types/types';
 import css from './Users.module.css'
 
-// "name": "anatoliy",
-//             "id": 5358,
-//             "uniqueUrlName": null,
-//             "photos": {
-//                 "small": null,
-//                 "large": null
-//             },
-//             "status": null,
-//             "followed": false
+type PropsType = {
+    totalUsers: number
+    pageSize: number
+    pageChanged: (pageNum: number) => void
+    currentPage: number
+    users: Array<UserType>
+    setUnfollow: (userId: number) => void
+    setFollow: (userId: number) => void
+    followingInProgres: Array<number>
+}
 
-
-const Users = (props) => {
+const Users: React.FC<PropsType> = (props) => {
 
   return (
     <div>
