@@ -13,12 +13,7 @@ const FOLLOWING_CHANGING = 'FOLLOWING_CHANGING';
 
 
 let initialState = {
-  users: [
-    // { id: 1, avaSrc: '/img/girl1.jpg', follow: true, fullName: "Sveta", status: "free for chat", location: {country:"Russia", city: "Moscow"} },
-    // { id: 2, avaSrc: '/img/ava.png', follow: false, fullName: "Misha", status: "free for chat", location: {country:"Russia", city: "Yaroslavl"} },
-    // { id: 3, avaSrc: '/img/ava2.jpg', follow: false, fullName: "Dima", status: "free for chat", location: {country:"Russia", city: "Piter"} },
-    // { id: 4, avaSrc: '/img/ava4.png', follow: true, fullName: "Katya", status: "learning", location: {country:"Russia", city: "Piter"} },
-  ] as Array<UserType>,
+  users: [] as Array<UserType>,
   totalUsers: 0,
   pageSize: 5,
   currentPage: 1,

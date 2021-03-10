@@ -1,9 +1,17 @@
 import React, {useState} from 'react';
 import css from './Paginator.module.css'
 
-const Paginator = ({ totalUsers, pageSize, pageChanged, currentPage, sectionSize = 10 }) => {
-    const pagesCount = Math.ceil(totalUsers / pageSize);
-    const pages = [];
+type PropsType = {
+    totalUsers: number
+    pageSize: number
+    pageChanged: (pageNum: number) => void
+    currentPage: number
+    sectionSize: number
+}
+
+const Paginator: React.FC<PropsType> = ({ totalUsers, pageSize, pageChanged, currentPage, sectionSize = 10 }) => {
+    const pagesCount: number = Math.ceil(totalUsers / pageSize);
+    const pages: Array<number> = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
@@ -13,7 +21,7 @@ const Paginator = ({ totalUsers, pageSize, pageChanged, currentPage, sectionSize
     const leftSideSectionPageNumber = sectionNumber * sectionSize - sectionSize + 1;
     const rightSideSectionPageNumber = sectionNumber * sectionSize;
 
-    const changeCurrentPage = (e) => {
+    const changeCurrentPage = (e: any): void => {
         if (e.target.tagName === "SPAN") {
             pageChanged(Number(e.target.textContent))
         }
@@ -25,7 +33,7 @@ const Paginator = ({ totalUsers, pageSize, pageChanged, currentPage, sectionSize
             <div onClick={changeCurrentPage}>
                 {
                     pages.filter( page => page >= leftSideSectionPageNumber && page <= rightSideSectionPageNumber)
-                    .map((page, index) => <span className={currentPage === page && css.active} key={index}> {page} </span>)
+                    .map((page, index) => <span className={currentPage === page ? css.active : undefined} key={index}> {page} </span>)
                 }
             </div>
             {sectionNumber < sectionCount && <button onClick = {() => {setSectionNumber(sectionNumber + 1)}}>next</button>}
