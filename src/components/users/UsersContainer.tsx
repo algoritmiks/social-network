@@ -8,9 +8,24 @@ import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { setUnfollow, setFollow, followingChange, getUsers } from '../../redux/usersReducer';
 import { getUsersFromState, getPageSizeFromState, getTotalUsersFromState,
         getCurrentPageFromState, getIsLoadingFromState, getFollowingInProgresFromState } from '../../redux/usersSelectors';
+import { UserType } from '../../types/types'
+import { AppStateType } from '../../redux/reduxStore';
 
 
-class UsersAPIComponent extends React.Component {
+type PropsType = {
+    pageSize: number
+    currentPage: number
+    isLoading: boolean
+    totalUsers: number
+    users: Array<UserType>
+    followingInProgres: Array<number>
+    getUsers: (currentPage: number, pageSize: number) => void
+    pageChanged: (pageNum: number) => void
+    setUnfollow: (userId: number) => void
+    setFollow: (userId: number) => void
+}        
+
+class UsersAPIComponent extends React.Component<PropsType> {
 
   // constructor(props) { //You shouldn't use this bind, if you use arrow function
   //   super(props);
@@ -23,7 +38,7 @@ class UsersAPIComponent extends React.Component {
   };
 
 
-  pageChanged = (pageNum) => {   //You should use arrow function here, or use bind in constructor
+  pageChanged = (pageNum: number) => {   //You should use arrow function here, or use bind in constructor
     const {pageSize} = this.props;
     this.props.getUsers(pageNum, pageSize);
   }
@@ -47,7 +62,7 @@ class UsersAPIComponent extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType) => {
   return {
     users: getUsersFromState(state),
     pageSize: getPageSizeFromState(state),
