@@ -1,7 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, ChangeEvent} from 'react';
 
 
-const ProfileStatus = (props) => {
+type PropsType = {
+    userStatus: string
+    userId: number
+    updateUserStatus: (userStatus: string) => void
+}
+
+const ProfileStatus = (props: PropsType) => {
   let [editMode, setEditMode] = useState(false);
   let [userStatus, setUserStatus] = useState(props.userStatus);
 
@@ -11,17 +17,17 @@ const ProfileStatus = (props) => {
   }, [props.userStatus]);
 
 
-  const toggleUserStatus = (mode) => {
+  const toggleUserStatus = (mode: boolean) => {
     if (!props.userId) {
         setEditMode(mode);
     }
   } 
 
-  const changeUserStatus = (e) => {
+  const changeUserStatus = (e: ChangeEvent<HTMLInputElement>) => {
     setUserStatus(e.currentTarget.value)
   }
 
-  const updateUserStatus = (editMode) => {
+  const updateUserStatus = (editMode: boolean) => {
     toggleUserStatus(editMode);
     props.updateUserStatus(userStatus);
   }
