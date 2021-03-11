@@ -18,11 +18,12 @@ let initialState = {
   pageSize: 5,
   currentPage: 1,
   isLoading: false,
-  followingInProgres: []
+  followingInProgres: [] as Array<number>
 };
 
+type StateType = typeof initialState;
 
-const usersReducer = (state = initialState, action: any) => {
+const usersReducer = (state = initialState, action: any): StateType => {
   switch (action.type) {
     case FOLLOW:
       return {

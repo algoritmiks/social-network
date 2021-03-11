@@ -18,8 +18,8 @@ let reducers = combineReducers({
     form: formReducer
 });
 
-type ReducerType = typeof reducers;
-export type AppStateType = ReturnType<ReducerType>;
+type ReducersType = typeof reducers;
+export type AppStateType = ReturnType<ReducersType>;
 
 //@ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
