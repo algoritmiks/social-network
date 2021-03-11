@@ -114,7 +114,7 @@ type FollowingChangeActionType = {
     followingInProgres: boolean,
     id: number
 }
-export const followingChange = (followingInProgres: boolean, id: number): FollowingChangeActionType => ({ type: FOLLOWING_CHANGING, followingInProgres, id});
+const followingChange = (followingInProgres: boolean, id: number): FollowingChangeActionType => ({ type: FOLLOWING_CHANGING, followingInProgres, id});
 
 export const getUsers = (currentPage: number, pageSize: number) => async(dispatch: any) => {
   dispatch(setLoading(true));

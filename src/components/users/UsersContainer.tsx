@@ -5,25 +5,32 @@ import { compose } from "redux";
 import Users from './Users';
 import Preloader from '../common/preloader/Preloader'
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { setUnfollow, setFollow, followingChange, getUsers } from '../../redux/usersReducer';
+import { setUnfollow, setFollow, getUsers } from '../../redux/usersReducer';
 import { getUsersFromState, getPageSizeFromState, getTotalUsersFromState,
         getCurrentPageFromState, getIsLoadingFromState, getFollowingInProgresFromState } from '../../redux/usersSelectors';
 import { UserType } from '../../types/types'
 import { AppStateType } from '../../redux/reduxStore';
 
-
-type PropsType = {
+type MapStateToPropsType = {
+    users: Array<UserType>
     pageSize: number
+    totalUsers: number
     currentPage: number
     isLoading: boolean
-    totalUsers: number
-    users: Array<UserType>
     followingInProgres: Array<number>
+}
+
+type MapDispatchToPropsType = {
     getUsers: (currentPage: number, pageSize: number) => void
-    pageChanged: (pageNum: number) => void
     setUnfollow: (userId: number) => void
     setFollow: (userId: number) => void
-}        
+}
+
+type OwnPropsType = {
+    pageChanged: (pageNum: number) => void
+}
+
+type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsType
 
 class UsersAPIComponent extends React.Component<PropsType> {
 
@@ -62,7 +69,7 @@ class UsersAPIComponent extends React.Component<PropsType> {
   }
 }
 
-const mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
   return {
     users: getUsersFromState(state),
     pageSize: getPageSizeFromState(state),
@@ -74,6 +81,7 @@ const mapStateToProps = (state: AppStateType) => {
 };
 
 export default compose(
-  connect( mapStateToProps, {setFollow, setUnfollow, followingChange, getUsers} ),
-  withAuthRedirect
+    //TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultState
+    connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>( mapStateToProps, {setFollow, setUnfollow, getUsers} ),
+    withAuthRedirect
 )(UsersAPIComponent)
