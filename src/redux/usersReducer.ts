@@ -1,5 +1,7 @@
 import { UserType } from '../types/types';
+import { AppStateType } from './reduxStore';
 import { usersAPI } from '../api/api';
+import { ThunkAction } from 'redux-thunk';
 
 
 
@@ -23,7 +25,7 @@ let initialState = {
 
 type StateType = typeof initialState;
 
-const usersReducer = (state = initialState, action: any): StateType => {
+const usersReducer = (state = initialState, action: ActionsType): StateType => {
   switch (action.type) {
     case FOLLOW:
       return {
@@ -73,6 +75,10 @@ const usersReducer = (state = initialState, action: any): StateType => {
   }
 }
 
+type ActionsType =  MakeFollowActionType | MakeUnfollowActionType | SetUsersActionType | SetCurrentPageActionType |
+    SetTotalUsersActionType | SetLoadingActionType | FollowingChangeActionType;
+
+
 type MakeFollowActionType = {
     type: typeof FOLLOW,
     userID: number
@@ -116,7 +122,11 @@ type FollowingChangeActionType = {
 }
 const followingChange = (followingInProgres: boolean, id: number): FollowingChangeActionType => ({ type: FOLLOWING_CHANGING, followingInProgres, id});
 
-export const getUsers = (currentPage: number, pageSize: number) => async(dispatch: any) => {
+type GetStateType = () => AppStateType
+type ThunkType = ThunkAction<Promise<void>, GetStateType, unknown, ActionsType>
+
+
+export const getUsers = (currentPage: number, pageSize: number):  ThunkType => async(dispatch) => {
   dispatch(setLoading(true));
   dispatch(setCurrentPage(currentPage));
   const data = await usersAPI.getUsers(currentPage, pageSize);
@@ -126,7 +136,7 @@ export const getUsers = (currentPage: number, pageSize: number) => async(dispatc
 };
 
 
-export const setUnfollow = (userId: number) => async (dispatch: any) => {
+export const setUnfollow = (userId: number): ThunkType => async (dispatch) => {
   dispatch(followingChange(true, userId));
   const resultCode = await usersAPI.setUnfollow(userId);
     
@@ -136,7 +146,7 @@ export const setUnfollow = (userId: number) => async (dispatch: any) => {
   dispatch(followingChange(false, userId));
 }
 
-export const setFollow = (userId: number) => async (dispatch: any) => {
+export const setFollow = (userId: number): ThunkType => async (dispatch) => {
   dispatch(followingChange(true, userId));
   const resultCode = await usersAPI.setFollow(userId)
 
