@@ -1,5 +1,5 @@
 import { stopSubmit } from 'redux-form';
-import { authAPI, securityAPI } from '../api/api';
+import { authAPI, securityAPI, ResultCodesEnum, ResultCodeCaptcha } from '../api/api';
 
 const SET_USER_DATA = "SET_USER_DATA";
 const SET_CAPTCHA_URL = "CAPTCHA_URL";
@@ -72,14 +72,14 @@ export const getAuthData = () => (dispatch: any) => {
 
 
 export const login = (email: string, password: string, rememberMe: boolean, captcha: string) => async (dispatch: any) => {
-    const res = await authAPI.login(email, password, rememberMe, captcha);
-    if (!res.data.resultCode) {
+    const data = await authAPI.login(email, password, rememberMe, captcha);
+    if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(getAuthData());
     } else {
-        if (res.data.resultCode === 10) {
+        if (data.resultCode === ResultCodeCaptcha.CaptchaRequired) {
             dispatch(getCaptcha());
         }
-        const msg = res.data.messages.length > 0 ? res.data.messages[0] : 'wrong auth data';
+        const msg = data.messages.length > 0 ? data.messages[0] : 'wrong auth data';
         dispatch(stopSubmit('login', { _error: msg }));
     }
 };
@@ -87,7 +87,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
 
 export const logout = () => async (dispatch: any) => {
     const res = await authAPI.logout();
-    if (!res.data.resultCode) {
+    if (res.data.resultCode === ResultCodesEnum.Success) {
         dispatch(setUserData(null, null, null, false));
     }
 };
